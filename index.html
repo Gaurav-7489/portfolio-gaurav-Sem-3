@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My 3D Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        body {
+            background-image: url('gradient.png');
+            /* light theme */
+            background-size: cover;
+            background-repeat: no-repeat;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .dark body {
+            background-image: none;
+            /* dark theme uses plain color */
+            background-color: #111827;
+            /* dark:bg-gray-900 */
+        }
+
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            transition: background-color 1s ease, color 1s ease;
+        }
+
+        body,
+        .page-section,
+        header,
+        footer,
+        .bg-white\/70,
+        .bg-gray-50 {
+            transition: background-color 1s ease, color 1s ease;
+        }
+
+        .page-section {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .page-section.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            position: relative;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .glowing-btn {
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            transition: color 0.4s ease-in-out;
+        }
+
+        .glowing-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.4s ease-in-out;
+            z-index: -1;
+        }
+
+        .glowing-btn:hover::before {
+            transform: translate(-50%, -50%) scale(2);
+        }
+
+        #journey-section div::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #journey-section div::-webkit-scrollbar-thumb {
+            background-color: rgba(66, 153, 225, 0.6);
+            border-radius: 4px;
+        }
+
+        #journey-section div::-webkit-scrollbar-track {
+            background: transparent;
+        }
+    </style>
+
+</head>
+
+<body class="min-h-screen flex flex-col text-gray-800 dark:text-gray-100 transition-colors duration-300">
+
+    <div id="canvas-container"></div>
+
+    <header class="bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 sticky top-0 z-50 p-2 sm:p-4 shadow-md">
+        <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between">
+            <a href="#" class="text-xl font-bold rounded-lg p-1 sm:p-2 transition-colors hover:text-blue-500">My Portfolio</a>
+            <nav class="mt-2 sm:mt-0">
+                <ul class="flex flex-col sm:flex-row space-y-1 sm:space-x-4 sm:space-y-0 md:space-x-8 items-center text-sm sm:text-base">
+                    <li data-aos="fade-down" data-aos-duration="1200"><a href="#" data-page="home"
+                                class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Home</a>
+                    </li>
+                    <li data-aos="fade-down" data-aos-duration="1500"><a href="#" data-page="project"
+                                class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Projects</a>
+                    </li>
+                    <li data-aos="fade-down" data-aos-duration="1800"><a href="#" data-page="journey"
+                                class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">My
+                                Journey</a>
+                    </li>
+                    <li data-aos="fade-down" data-aos-duration="2200"><a href="#" data-page="contact"
+                                class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Contact</a>
+                    </li>
+                    <li data-aos="fade-down" data-aos-duration="2500"><a href="#" data-page="about"
+                                class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">About</a>
+                    </li>
+                </ul>
+            </nav>
+            <button id="theme-toggle" class="p-1 rounded-full glowing-btn mt-2 sm:mt-0">
+
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                    aria-hidden="true" focusable="false" class="w-4 h-4 sm:w-5 sm:h-5">
+                    <path fill="currentColor"
+                        d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79 1.8-1.79zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.04 1.04l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 8a4 4 0 100 8 4 4 0 000-8zm4.24 9.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM4.21 18.36l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z" />
+                </svg>
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                    aria-hidden="true" focusable="false" class="w-4 h-4 sm:w-5 sm:h-5">
+                    <path fill="currentColor" d="M21.75 15.5A9 9 0 0110.5 2.25 7 7 0 0021.75 15.5z" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto flex-grow px-2 py-4 sm:px-4 sm:py-8 relative">
+
+        <section id="home-section"
+            class="page-section active text-center flex flex-col items-center justify-center min-h-96 my-8">
+            <div
+                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl max-w-2xl mx-auto border border-[#D9C6A3]">
+                <h1 class="text-3xl md:text-6xl font-extrabold mb-2 sm:mb-4 animate-pulse">Welcome to My Portfolio</h1>
+                <p class="text-lg md:text-xl font-light">Explore my work and learn more about me.</p>
+            </div>
+        </section>
+
+        <section id="about-section" class="page-section my-8">
+            <div
+                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3]">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">About Me</h2>
+                <div class="mb-8">
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-blue-500 dark:text-blue-400">Skills</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                        <div
+                            class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 flex items-center space-x-3">
+                            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+                            </svg>
+                            <div>
+                                <h4 class="font-bold">Web Development</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">HTML, CSS</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 flex items-center space-x-3">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 2a10 10 0 100 20 10 10 0 000-20z" />
+                            </svg>
+                            <div>
+                                <h4 class="font-bold">Backend</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Python</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 flex items-center space-x-3">
+                            <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 7h10v10H7V7z" />
+                            </svg>
+                            <div>
+                                <h4 class="font-bold">Tools</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Github, VS Code</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 flex items-center space-x-3">
+                            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 16h8" />
+                            </svg>
+                            <div>
+                                <h4 class="font-bold">Linux</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">RHEL</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 flex items-center space-x-3">
+                            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M8 10h.01M12 10h.01M16 10h.01M21 16.5a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <div>
+                                <h4 class="font-bold">Communication</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Verbal, Non-verbal, Para-langauge
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-blue-500 dark:text-blue-400">Certificates</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                        <a href="https://www.credly.com/badges/cba24d8d-e1a1-415d-8bff-e71ac079fa96/linked_in?t=sy7kbb"
+                            target="_blank"
+                            class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <p class="font-bold">Red Hat System Administration I (RH124 - RHA) Version 9.3 course</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Issued by Red Hat-credly.com, 2024</p>
+                        </a>
+
+                        <a href="https://drive.google.com/file/d/1nxbbnM_8_elcTBIDrZzeM1oNvnm6Cryq/view" target="_blank"
+                            class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <p class="font-bold">IELTS Certificate.
+                            </p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Issued by Cambridge, 2024</p>
+                        </a>
+
+                        <a href="https://drive.google.com/file/d/1Afkm6fGUjKWjO4x-ty3okIkkdtXLdioS/view" target="_blank"
+                            class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <p class="font-bold">National Level Online Quiz organized </p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Issued by Government college jind, 2025
+                            </p>
+                        </a>
+
+                        <a href="https://drive.google.com/file/d/1CZGeKMOraCcFo5yDVQe0SjpFd-BRtI0H/view" target="_blank"
+                            class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <p class="font-bold">Exin BCS Airtifical intelligence essentail certification</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Issued by Exin, 2024</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-section" class="page-section my-8">
+            <div
+                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3]">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">My Projects</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div data-aos="fade-down-left" data-aos-duration="1200"
+                        class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md">
+                        <h3 class="text-xl font-bold mb-2">Project A</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Null.</p>
+                        <a href="#"
+                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View
+                            Project</a>
+                    </div>
+                    <div data-aos="fade-down-left" data-aos-duration="1500"
+                        class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md">
+                        <h3 class="text-xl font-bold mb-2">Project B</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Null.</p>
+                        <a href="#"
+                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View
+                            Project</a>
+                    </div>
+                    <div data-aos="fade-down-left" data-aos-duration="1700"
+                        class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md">
+                        <h3 class="text-xl font-bold mb-2">Project C</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Null.</p>
+                        <a href="#"
+                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View
+                            Project</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-section" class="page-section my-8">
+            <div
+                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl max-w-lg mx-auto border border-[#D9C6A3]">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">Contact Me</h2>
+
+                <form id="contact-form" action="https://formspree.io/f/xwpnzlgq" method="POST" class="space-y-4">
+                    <input type="hidden" name="_replyto" value="gauravbhardwaj7489@gmail.com">
+                    <div>
+                        <label for="name" class="block text-sm font-medium">Your Name</label>
+                        <input type="text" id="name" name="name" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium">Message</label>
+                        <textarea id="message" name="message" rows="4" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl glowing-btn hover:bg-blue-600 transition-colors">
+                        Send Message
+                    </button>
+                </form>
+
+                <div class="mt-8 text-center flex justify-center space-x-6">
+                    <a href="https://github.com/Gaurav-7489" target="_blank"
+                        class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.03c-3.338.724-4.033-1.61-4.033-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.76-1.604-2.665-.305-5.466-1.334-5.466-5.933 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.527.117-3.176 0 0 1.008-.322 3.3 1.23a11.51 11.51 0 016 0c2.29-1.552 3.296-1.23 3.296-1.23.653 1.65.242 2.873.118 3.176.77.84 1.234 1.91 1.234 3.22 0 4.61-2.805 5.625-5.476 5.922.43.372.815 1.104.815 2.225v3.293c0 .319.218.694.825.576C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/gaurav-bhardwaj-8080a1325/" target="_blank"
+                        class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 448 512">
+                            <path
+                                d="M100.28 448H7.4V148.9h92.88zm-46.44-338C24.07 110 0 85.93 0 56.56S24.07 3.12 53.84 3.12 107.68 27.19 107.68 56.56 83.61 110 53.84 110zM447.9 448h-92.68V302.4c0-34.7-12.44-58.4-43.48-58.4-23.73 0-37.88 16-44.1 31.4-2.27 5.5-2.84 13.2-2.84 21V448h-92.68s1.24-248 0-273.1h92.68v38.7c12.32-19 34.42-46.1 83.68-46.1 61.16 0 107.08 39.8 107.08 125.4V448z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="journey-section" data-page="journey" class="page-section my-8">
+            <div
+                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3] max-w-5xl mx-auto max-h-[70vh] md:max-h-[600px] overflow-y-auto cursor-[row-resize]">
+
+                <h2 class="text-2xl sm:text-3xl font-bold mb-10 text-center text-blue-500 dark:text-blue-400">
+                    My Journey
+                </h2>
+
+                <div class="relative border-l-4 border-blue-400 dark:border-blue-500">
+
+                    <div class="mb-10 ml-6">
+                        <div
+                            class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900">
+                        </div>
+                        <h3 class="text-xl font-bold">Background</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            I was born in <span class="font-semibold">Shimla (IGMC)</span> and belong to Kullu, Banjar.
+                            The culture and simplicity of the hills have shaped who I am today.
+                        </p>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=31.6376776,77.3440792"
+                            target="_blank"
+                            class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">
+                            View on Map →
+                        </a>
+                    </div>
+
+                    <div class="mb-10 ml-6">
+                        <div
+                            class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900">
+                        </div>
+                        <h3 class="text-xl font-bold">Schooling</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            I completed my schooling at <span class="font-semibold">Saraswati Vidya Mandir,
+                                Banjar</span>, with a focus on the medical stream. During these years, I was recognized
+                            for my creativity and painting skills, and I was known as an active and bright student among
+                            my peers. Alongside my main subjects, I developed an early interest in computers, which gave
+                            me the foundation to explore technology. The combination of creativity, discipline, and
+                            exposure to computers during my schooling has shaped the way I approach learning and
+                            problem-solving today.
+                        </p>
+                        <a href="https://www.facebook.com/people/Sarswati-Vidya-Mandir-Senior-Secondary-School-Banjar/100054372256803/"
+                            target="_blank"
+                            class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">
+                            School I Attended →
+                        </a>
+                    </div>
+
+                    <div class="mb-10 ml-6">
+                        <div
+                            class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900">
+                        </div>
+                        <h3 class="text-xl font-bold">2024 - Study Abroad Attempt</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            I completed the <span class="font-semibold">IELTS (from Rajasthan)</span> and aimed for an
+                            immersive Software
+                            Engineering program at the University of Limerick, Ireland. Unfortunately, my medical
+                            background led to rejection, and I had to abort my plan of studying abroad. I then decided
+                            to continue my education and career journey in India itself.
+                        </p>
+
+                    </div>
+
+                    <div class="mb-10 ml-6">
+                        <div
+                            class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900">
+                        </div>
+                        <h3 class="text-xl font-bold">2025 - College Journey</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            I chose <span class="font-semibold">NextGen CTPL</span> because of their updated curriculum
+                            and emphasis on modern technologies. From the first day, we started learning coding and
+                            practical skills. I am currently in my 2nd year, maintaining an overall <span
+                                class="font-semibold">SGPA of 8.7</span>, and continuously updating my learning journey
+                            through projects and hands-on experience.
+                        </p>
+                        <a href="https://nextgen.ctpl.io/" target="_blank"
+                            class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">
+                            About NEXTGen CTPL →
+                        </a>
+                    </div>
+
+                    <div class="ml-6">
+                        <div
+                            class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900">
+                        </div>
+                        <h3 class="text-xl font-bold">Present & Future Plan</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            I used to focus on one thing at a time, but now I realize the importance of learning
+                            multiple technologies simultaneously. I am strengthening my skills in <span
+                                class="font-semibold">AI and Machine Learning</span> as my main focus, while also
+                            learning Web Development, Python backend programming, Linux, SQL, and JavaScript. I have
+                            experience with HTML, CSS, and C, and surface knowledge of other technologies. I am
+                            exploring ML frameworks such as <span class="font-semibold">NumPy, Pandas, Matplotlib,
+                                Scikit-Learn, OpenCV</span> and plan to expand further. Gradually, I am getting the hang
+                            of managing my learning journey and preparing to tackle many exciting projects in the
+                            future.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-200 dark:bg-gray-900 border-t border-gray-300 dark:border-gray-700 py-6 mt-auto">
+        <div class="container mx-auto px-4 text-center text-[#8B5E3C] dark:text-gray-400">
+            <p>© 2024 My Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+
+        // Theme toggle initial setup
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        } else {
+            htmlElement.classList.remove('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            sunIcon.classList.toggle('hidden');
+            moonIcon.classList.toggle('hidden');
+            localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        // Page Navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageSections = document.querySelectorAll('.page-section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const target = document.getElementById(`${event.currentTarget.dataset.page}-section`);
+                const active = document.querySelector('.page-section.active');
+                if (active && active !== target) {
+                    active.classList.remove('active');
+                    requestAnimationFrame(() => target.classList.add('active'));
+                }
+            });
+        });
+
+        // Contact form overlay
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const overlay = document.createElement('div');
+            overlay.className = 'fixed inset-0 flex items-center justify-center bg-black/70 text-white text-xl font-bold z-50 rounded-lg';
+            overlay.innerText = 'Message sent successfully!';
+            overlay.style.opacity = 0;
+            overlay.style.transition = 'opacity 0.5s ease';
+            document.body.appendChild(overlay);
+            requestAnimationFrame(() => overlay.style.opacity = 1);
+            try {
+                const response = await fetch(form.action, { method: form.method, body: formData, headers: { 'Accept': 'application/json' } });
+                if (response.ok) {
+                    setTimeout(() => { overlay.style.opacity = 0; overlay.addEventListener('transitionend', () => overlay.remove()); form.reset(); }, 1500);
+                } else { throw new Error(); }
+            } catch { overlay.innerText = "Oops! Problem sending message."; setTimeout(() => { overlay.style.opacity = 0; overlay.addEventListener('transitionend', () => overlay.remove()); }, 1500); }
+        });
+
+        // Three.js 3D background
+        window.onload = function () {
+            const canvasContainer = document.getElementById('canvas-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            canvasContainer.appendChild(renderer.domElement);
+
+            // Donut setup
+            const torusMaterial = new THREE.MeshStandardMaterial({ roughness: 0.5 });
+            const torus = new THREE.Mesh(new THREE.TorusGeometry(1.5, 0.5, 16, 100), torusMaterial);
+            scene.add(torus);
+
+            // Lights
+            const pointLight = new THREE.PointLight(0xffffff, 1);
+            pointLight.position.set(20, 20, 20);
+            scene.add(pointLight);
+
+            scene.add(new THREE.AmbientLight(0x404040, 1.2));
+            
+            // Function to update the donut color based on theme
+            function updateTorusColor() {
+                if (htmlElement.classList.contains('dark')) {
+                    torus.material.color.setHex(0x2A52BE); // Bright cyan for black background
+                } else {
+                    torus.material.color.setHex(0x333333); // Charcoal gray for white background
+                }
+            }
+
+            // Function to adjust camera and torus scale based on window width
+            function adjust3DObjects() {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+
+                if (width < 380) { // Very small screens (e.g., 320px)
+                    camera.position.z = 7.5;
+                    torus.scale.set(0.65, 0.65, 0.65);
+                } else if (width >= 380 && width < 640) { // Small phones to larger phones
+                    camera.position.z = 6.5;
+                    torus.scale.set(0.8, 0.8, 0.8);
+                } else { // Larger screens
+                    camera.position.z = 5;
+                    torus.scale.set(1, 1, 1);
+                }
+            }
+
+            // Initial adjustments
+            adjust3DObjects();
+            updateTorusColor();
+
+            // Update color on theme toggle
+            themeToggle.addEventListener('click', () => {
+                updateTorusColor();
+            });
+
+            // Clouds (light mode only)
+            let clouds, cloudMaterial;
+
+            function initClouds() {
+                if (clouds) {
+                    scene.remove(clouds);
+                    clouds = null; // Clear existing clouds
+                }
+                if (htmlElement.classList.contains('dark')) return;
+
+                const ambientLight = new THREE.AmbientLight(0x333333, 1.2);
+                scene.add(ambientLight);
+
+                const cloudGeo = new THREE.PlaneGeometry(20, 20);
+                const loader = new THREE.TextureLoader();
+                loader.load('https://threejs.org/examples/textures/sprites/cloud.png', function (texture) {
+                    cloudMaterial = new THREE.MeshLambertMaterial({
+                        map: texture,
+                        transparent: true,
+                        opacity: 0.7,
+                        depthWrite: false
+                    });
+
+                    clouds = new THREE.Group();
+                    for (let i = 0; i < 30; i++) {
+                        const cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
+                        cloud.position.set(
+                            Math.random() * 100 - 50,
+                            Math.random() * 50 - 25,
+                            Math.random() * -50 - 10
+                        );
+                        cloud.rotation.z = Math.random() * 2 * Math.PI;
+                        cloud.scale.setScalar(Math.random() * 2 + 1);
+                        clouds.add(cloud);
+                    }
+                    scene.add(clouds);
+                });
+            }
+
+            // Stars (dark mode only)
+            let stars, starMaterial;
+
+            function initStars() {
+                if (stars) {
+                    scene.remove(stars);
+                    stars = null; // Clear existing stars
+                }
+                if (!htmlElement.classList.contains('dark')) return;
+                const starGeo = new THREE.BufferGeometry();
+                const starCount = 2000;
+                const positions = [];
+                for (let i = 0; i < starCount * 3; i++) positions.push((Math.random() - 0.5) * 200);
+                starGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+                starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.2, transparent: true, opacity: 0 });
+                stars = new THREE.Points(starGeo, starMaterial);
+                scene.add(stars);
+            }
+            // Initial call based on current theme
+            if (htmlElement.classList.contains('dark')) {
+                initStars();
+            } else {
+                initClouds();
+            }
+
+
+            function showStars(duration = 3000) {
+                if (!stars) return;
+                new TWEEN.Tween(starMaterial).to({ opacity: 1 }, 500).start();
+                setTimeout(() => new TWEEN.Tween(starMaterial).to({ opacity: 0 }, 500).start(), duration);
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Slightly slower rotation
+                torus.rotation.x += 0.0015;
+                torus.rotation.y += 0.0015;
+
+                if (stars) {
+                    stars.rotation.x += 0.0015;
+                    stars.rotation.y += 0.0015;
+                }
+
+                if (clouds) {
+                    clouds.children.forEach(cloud => {
+                        cloud.position.x -= 0.005;
+                        if (cloud.position.x < -60) {
+                            cloud.position.x = 60;
+                        }
+                    });
+                }
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            function animateTween(time) {
+                TWEEN.update(time);
+                requestAnimationFrame(animateTween);
+            }
+
+            animateTween();
+
+            window.addEventListener('resize', () => {
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                adjust3DObjects(); // Call the adjustment function on resize
+            });
+
+            themeToggle.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    initStars();
+                    if (clouds) scene.remove(clouds); // Remove clouds if switching to dark
+                } else {
+                    initClouds();
+                    if (stars) scene.remove(stars); // Remove stars if switching to light
+                }
+                updateTorusColor(); // Update donut color on theme change
+            });
+
+            navLinks.forEach(link => link.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) showStars(3000);
+            }));
+        };
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>
