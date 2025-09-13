@@ -65,6 +65,8 @@
             width: 100%;
             top: 0;
             left: 0;
+            height: 100%;
+            overflow-y: auto;
         }
 
         .page-section.active {
@@ -108,16 +110,16 @@
             transform: translate(-50%, -50%) scale(2);
         }
 
-        #journey-section div::-webkit-scrollbar {
+        #journey-section .inner-scroll-div::-webkit-scrollbar {
             width: 8px;
         }
 
-        #journey-section div::-webkit-scrollbar-thumb {
+        #journey-section .inner-scroll-div::-webkit-scrollbar-thumb {
             background-color: rgba(66, 153, 225, 0.6);
             border-radius: 4px;
         }
 
-        #journey-section div::-webkit-scrollbar-track {
+        #journey-section .inner-scroll-div::-webkit-scrollbar-track {
             background: transparent;
         }
     </style>
@@ -129,40 +131,75 @@
     <div id="canvas-container"></div>
 
     <header class="bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 sticky top-0 z-50 p-2 sm:p-4 shadow-md">
-        <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between">
+        <div class="container mx-auto flex items-center justify-between">
+            <button id="hamburger-button" class="sm:hidden p-2 rounded-full glowing-btn">
+                <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+                <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
             <a href="#" class="text-xl font-bold rounded-lg p-1 sm:p-2 transition-colors hover:text-blue-500">My Portfolio</a>
-            <nav class="mt-2 sm:mt-0">
-                <ul class="flex flex-col sm:flex-row space-y-1 sm:space-x-4 sm:space-y-0 md:space-x-8 items-center text-sm sm:text-base">
+
+            <nav id="desktop-nav" class="hidden sm:flex sm:flex-row sm:space-x-4 md:space-x-8 items-center text-sm sm:text-base">
+                <ul class="flex space-x-4 md:space-x-8 items-center">
                     <li data-aos="fade-down" data-aos-duration="1200"><a href="#" data-page="home"
-                                class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Home</a>
+                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Home</a>
                     </li>
                     <li data-aos="fade-down" data-aos-duration="1500"><a href="#" data-page="project"
-                                class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Projects</a>
+                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Projects</a>
                     </li>
                     <li data-aos="fade-down" data-aos-duration="1800"><a href="#" data-page="journey"
-                                class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">My
-                                Journey</a>
+                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">My
+                            Journey</a>
                     </li>
                     <li data-aos="fade-down" data-aos-duration="2200"><a href="#" data-page="contact"
-                                class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Contact</a>
+                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Contact</a>
                     </li>
                     <li data-aos="fade-down" data-aos-duration="2500"><a href="#" data-page="about"
-                                class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">About</a>
+                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">About</a>
                     </li>
                 </ul>
             </nav>
-            <button id="theme-toggle" class="p-1 rounded-full glowing-btn mt-2 sm:mt-0">
 
-                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                    aria-hidden="true" focusable="false" class="w-4 h-4 sm:w-5 sm:h-5">
-                    <path fill="currentColor"
-                        d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79 1.8-1.79zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.04 1.04l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 8a4 4 0 100 8 4 4 0 000-8zm4.24 9.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM4.21 18.36l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z" />
-                </svg>
-                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                    aria-hidden="true" focusable="false" class="w-4 h-4 sm:w-5 sm:h-5">
-                    <path fill="currentColor" d="M21.75 15.5A9 9 0 0110.5 2.25 7 7 0 0021.75 15.5z" />
-                </svg>
-            </button>
+            <nav id="mobile-nav"
+                class="hidden absolute top-[60px] left-0 w-full bg-gray-200 dark:bg-gray-800 shadow-md p-4 flex-col items-center sm:hidden">
+                <ul class="flex flex-col space-y-4 text-center">
+                    <li data-aos="fade-down" data-aos-duration="1200"><a href="#" data-page="home"
+                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">Home</a>
+                    </li>
+                    <li data-aos="fade-down" data-aos-duration="1500"><a href="#" data-page="project"
+                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">Projects</a>
+                    </li>
+                    <li data-aos="fade-down" data-aos-duration="1800"><a href="#" data-page="journey"
+                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">My
+                            Journey</a>
+                    </li>
+                    <li data-aos="fade-down" data-aos-duration="2200"><a href="#" data-page="contact"
+                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">Contact</a>
+                    </li>
+                    <li data-aos="fade-down" data-aos-duration="2500"><a href="#" data-page="about"
+                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">About</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="flex items-center">
+                <button id="theme-toggle" class="p-1 rounded-full glowing-btn ml-2">
+                    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                        aria-hidden="true" focusable="false" class="w-4 h-4 sm:w-5 sm:h-5">
+                        <path fill="currentColor"
+                            d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79 1.8-1.79zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.04 1.04l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 8a4 4 0 100 8 4 4 0 000-8zm4.24 9.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM4.21 18.36l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z" />
+                    </svg>
+                    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                        aria-hidden="true" focusable="false" class="w-4 h-4 sm:w-5 sm:h-5 hidden">
+                        <path fill="currentColor" d="M21.75 15.5A9 9 0 0110.5 2.25 7 7 0 0021.75 15.5z" />
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -349,23 +386,22 @@
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.03c-3.338.724-4.033-1.61-4.033-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.76-1.604-2.665-.305-5.466-1.334-5.466-5.933 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.527.117-3.176 0 0 1.008-.322 3.3 1.23a11.51 11.51 0 016 0c2.29-1.552 3.296-1.23 3.296-1.23.653 1.65.242 2.873.118 3.176.77.84 1.234 1.91 1.234 3.22 0 4.61-2.805 5.625-5.476 5.922.43.372.815 1.104.815 2.225v3.293c0 .319.218.694.825.576C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z" />
-                        </svg>
-                    </a>
+                    </svg>
+                </a>
 
-                    <a href="https://www.linkedin.com/in/gaurav-bhardwaj-8080a1325/" target="_blank"
-                        class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 448 512">
-                            <path
-                                d="M100.28 448H7.4V148.9h92.88zm-46.44-338C24.07 110 0 85.93 0 56.56S24.07 3.12 53.84 3.12 107.68 27.19 107.68 56.56 83.61 110 53.84 110zM447.9 448h-92.68V302.4c0-34.7-12.44-58.4-43.48-58.4-23.73 0-37.88 16-44.1 31.4-2.27 5.5-2.84 13.2-2.84 21V448h-92.68s1.24-248 0-273.1h92.68v38.7c12.32-19 34.42-46.1 83.68-46.1 61.16 0 107.08 39.8 107.08 125.4V448z" />
-                        </svg>
-                    </a>
-                </div>
+                <a href="https://www.linkedin.com/in/gaurav-bhardwaj-8080a1325/" target="_blank"
+                    class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 448 512">
+                        <path
+                            d="M100.28 448H7.4V148.9h92.88zm-46.44-338C24.07 110 0 85.93 0 56.56S24.07 3.12 53.84 3.12 107.68 27.19 107.68 56.56 83.61 110 53.84 110zM447.9 448h-92.68V302.4c0-34.7-12.44-58.4-43.48-58.4-23.73 0-37.88 16-44.1 31.4-2.27 5.5-2.84 13.2-2.84 21V448h-92.68s1.24-248 0-273.1h92.68v38.7c12.32-19 34.42-46.1 83.68-46.1 61.16 0 107.08 39.8 107.08 125.4V448z" />
+                    </svg>
+                </a>
             </div>
         </section>
 
         <section id="journey-section" data-page="journey" class="page-section my-8">
             <div
-                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3] max-w-5xl mx-auto max-h-[70vh] md:max-h-[600px] overflow-y-auto cursor-[row-resize]">
+                class="inner-scroll-div bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3] max-w-5xl mx-auto">
 
                 <h2 class="text-2xl sm:text-3xl font-bold mb-10 text-center text-blue-500 dark:text-blue-400">
                     My Journey
@@ -472,7 +508,6 @@
     </footer>
 
     <script>
-
         // Theme toggle initial setup
         const themeToggle = document.getElementById('theme-toggle');
         const sunIcon = document.getElementById('sun-icon');
@@ -499,6 +534,13 @@
         // Page Navigation
         const navLinks = document.querySelectorAll('.nav-link');
         const pageSections = document.querySelectorAll('.page-section');
+        const mobileNav = document.getElementById('mobile-nav');
+        const hamburgerButton = document.getElementById('hamburger-button');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const mainContent = document.getElementById('main-content');
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
 
         navLinks.forEach(link => {
             link.addEventListener('click', (event) => {
@@ -509,10 +551,41 @@
                     active.classList.remove('active');
                     requestAnimationFrame(() => target.classList.add('active'));
                 }
+                if (window.innerWidth < 640) {
+                    mobileNav.classList.add('hidden');
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                }
             });
         });
 
-        // Contact form overlay
+        function adjustDonutForMenu() {
+            if (window.innerWidth < 640 && !mobileNav.classList.contains('hidden')) {
+                // Menu is open, make donut slightly smaller
+                torus.scale.set(0.65, 0.65, 0.65);
+                camera.position.z = 7;
+            } else {
+                // Menu is closed, adjust donut based on screen size
+                adjust3DObjects();
+            }
+        }
+
+        hamburgerButton.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+            hamburgerIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+            adjustDonutForMenu(); // Adjust donut size when menu is toggled
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 640) {
+                mobileNav.classList.add('hidden');
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+            adjustDonutForMenu(); // Adjust donut on resize
+        });
+
         const form = document.getElementById('contact-form');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -532,7 +605,6 @@
             } catch { overlay.innerText = "Oops! Problem sending message."; setTimeout(() => { overlay.style.opacity = 0; overlay.addEventListener('transitionend', () => overlay.remove()); }, 1500); }
         });
 
-        // Three.js 3D background
         window.onload = function () {
             const canvasContainer = document.getElementById('canvas-container');
             const scene = new THREE.Scene();
@@ -542,68 +614,59 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             canvasContainer.appendChild(renderer.domElement);
 
-            // Donut setup
             const torusMaterial = new THREE.MeshStandardMaterial({ roughness: 0.5 });
             const torus = new THREE.Mesh(new THREE.TorusGeometry(1.5, 0.5, 16, 100), torusMaterial);
             scene.add(torus);
 
-            // Lights
             const pointLight = new THREE.PointLight(0xffffff, 1);
             pointLight.position.set(20, 20, 20);
             scene.add(pointLight);
 
             scene.add(new THREE.AmbientLight(0x404040, 1.2));
             
-            // Function to update the donut color based on theme
             function updateTorusColor() {
                 if (htmlElement.classList.contains('dark')) {
-                    torus.material.color.setHex(0x2A52BE); // Bright cyan for black background
+                    torus.material.color.setHex(0x2A52BE);
                 } else {
-                    torus.material.color.setHex(0x333333); // Charcoal gray for white background
+                    torus.material.color.setHex(0x333333);
                 }
             }
 
-            // Function to adjust camera and torus scale based on window width
             function adjust3DObjects() {
                 const width = window.innerWidth;
                 const height = window.innerHeight;
                 camera.aspect = width / height;
                 camera.updateProjectionMatrix();
 
-                if (width < 380) { // Very small screens (e.g., 320px)
+                if (width < 320) {
                     camera.position.z = 7.5;
                     torus.scale.set(0.65, 0.65, 0.65);
-                } else if (width >= 380 && width < 640) { // Small phones to larger phones
+                } else if (width >= 320 && width < 640) {
                     camera.position.z = 6.5;
-                    torus.scale.set(0.8, 0.8, 0.8);
-                } else { // Larger screens
+                    torus.scale.set(0.7, 0.7, 0.7);
+                } else {
                     camera.position.z = 5;
                     torus.scale.set(1, 1, 1);
                 }
             }
 
-            // Initial adjustments
             adjust3DObjects();
             updateTorusColor();
 
-            // Update color on theme toggle
             themeToggle.addEventListener('click', () => {
                 updateTorusColor();
             });
 
-            // Clouds (light mode only)
             let clouds, cloudMaterial;
 
             function initClouds() {
                 if (clouds) {
                     scene.remove(clouds);
-                    clouds = null; // Clear existing clouds
+                    clouds = null;
                 }
                 if (htmlElement.classList.contains('dark')) return;
-
                 const ambientLight = new THREE.AmbientLight(0x333333, 1.2);
                 scene.add(ambientLight);
-
                 const cloudGeo = new THREE.PlaneGeometry(20, 20);
                 const loader = new THREE.TextureLoader();
                 loader.load('https://threejs.org/examples/textures/sprites/cloud.png', function (texture) {
@@ -613,7 +676,6 @@
                         opacity: 0.7,
                         depthWrite: false
                     });
-
                     clouds = new THREE.Group();
                     for (let i = 0; i < 30; i++) {
                         const cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
@@ -630,13 +692,11 @@
                 });
             }
 
-            // Stars (dark mode only)
             let stars, starMaterial;
-
             function initStars() {
                 if (stars) {
                     scene.remove(stars);
-                    stars = null; // Clear existing stars
+                    stars = null;
                 }
                 if (!htmlElement.classList.contains('dark')) return;
                 const starGeo = new THREE.BufferGeometry();
@@ -648,13 +708,11 @@
                 stars = new THREE.Points(starGeo, starMaterial);
                 scene.add(stars);
             }
-            // Initial call based on current theme
             if (htmlElement.classList.contains('dark')) {
                 initStars();
             } else {
                 initClouds();
             }
-
 
             function showStars(duration = 3000) {
                 if (!stars) return;
@@ -664,16 +722,12 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-
-                // Slightly slower rotation
                 torus.rotation.x += 0.0015;
                 torus.rotation.y += 0.0015;
-
                 if (stars) {
                     stars.rotation.x += 0.0015;
                     stars.rotation.y += 0.0015;
                 }
-
                 if (clouds) {
                     clouds.children.forEach(cloud => {
                         cloud.position.x -= 0.005;
@@ -682,33 +736,30 @@
                         }
                     });
                 }
-
                 renderer.render(scene, camera);
             }
-
             animate();
 
             function animateTween(time) {
                 TWEEN.update(time);
                 requestAnimationFrame(animateTween);
             }
-
             animateTween();
 
             window.addEventListener('resize', () => {
                 renderer.setSize(window.innerWidth, window.innerHeight);
-                adjust3DObjects(); // Call the adjustment function on resize
+                adjust3DObjects();
             });
 
             themeToggle.addEventListener('click', () => {
                 if (htmlElement.classList.contains('dark')) {
                     initStars();
-                    if (clouds) scene.remove(clouds); // Remove clouds if switching to dark
+                    if (clouds) scene.remove(clouds);
                 } else {
                     initClouds();
-                    if (stars) scene.remove(stars); // Remove stars if switching to light
+                    if (stars) scene.remove(stars);
                 }
-                updateTorusColor(); // Update donut color on theme change
+                updateTorusColor();
             });
 
             navLinks.forEach(link => link.addEventListener('click', () => {
@@ -721,4 +772,5 @@
         AOS.init();
     </script>
 </body>
+
 </html>
