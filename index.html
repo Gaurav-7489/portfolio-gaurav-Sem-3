@@ -130,22 +130,27 @@
 
     <div id="canvas-container"></div>
 
-    <header class="bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 sticky top-0 z-50 p-2 sm:p-4 shadow-md">
+    <header
+        class="bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 sticky top-0 z-50 p-2 sm:p-4 shadow-md">
         <div class="container mx-auto flex items-center justify-between">
             <button id="hamburger-button" class="sm:hidden p-2 rounded-full glowing-btn">
                 <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
                 </svg>
                 <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
                 </svg>
             </button>
 
-            <a href="#" class="text-xl font-bold rounded-lg p-1 sm:p-2 transition-colors hover:text-blue-500">My Portfolio</a>
+            <a href="#" class="text-xl font-bold rounded-lg p-1 sm:p-2 transition-colors hover:text-blue-500">My
+                Portfolio</a>
 
-            <nav id="desktop-nav" class="hidden sm:flex sm:flex-row sm:space-x-4 md:space-x-8 items-center text-sm sm:text-base">
+            <nav id="desktop-nav"
+                class="hidden sm:flex sm:flex-row sm:space-x-4 md:space-x-8 items-center text-sm sm:text-base">
                 <ul class="flex space-x-4 md:space-x-8 items-center">
                     <li data-aos="fade-down" data-aos-duration="1200"><a href="#" data-page="home"
                             class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Home</a>
@@ -290,7 +295,8 @@
                 </div>
 
                 <div>
-                    <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-blue-500 dark:text-blue-400">Certificates</h3>
+                    <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-blue-500 dark:text-blue-400">Certificates
+                    </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                         <a href="https://www.credly.com/badges/cba24d8d-e1a1-415d-8bff-e71ac079fa96/linked_in?t=sy7kbb"
@@ -356,52 +362,52 @@
                 </div>
             </div>
         </section>
-<section id="contact-section" class="page-section my-8">
-    <div
-        class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl max-w-lg mx-auto border border-[#D9C6A3]">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">Contact Me</h2>
+        <section id="contact-section" class="page-section my-8">
+            <div
+                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl max-w-lg mx-auto border border-[#D9C6A3]">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">Contact Me</h2>
 
-        <form id="contact-form" action="https://formspree.io/f/xwpnzlgq" method="POST" class="space-y-4">
-            <div>
-                <label for="name" class="block text-sm font-medium">Your Name</label>
-                <input type="text" id="name" name="name" required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
-            </div>
-            <div>
-                <label for="email" class="block text-sm font-medium">Your Email</label>
-                <input type="email" id="email" name="_replyto" required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
-            </div>
-            <div>
-                <label for="message" class="block text-sm font-medium">Message</label>
-                <textarea id="message" name="message" rows="4" required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"></textarea>
-            </div>
-            <button type="submit"
-                class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl glowing-btn hover:bg-blue-600 transition-colors">
-                Send Message
-            </button>
-        </form>
+                <form id="contact-form" action="https://formspree.io/f/xwpnzlgq" method="POST" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium">Your Name</label>
+                        <input type="text" id="name" name="name" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium">Your Email</label>
+                        <input type="email" id="email" name="_replyto" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium">Message</label>
+                        <textarea id="message" name="message" rows="4" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl glowing-btn hover:bg-blue-600 transition-colors">
+                        Send Message
+                    </button>
+                </form>
 
-        <div class="mt-8 text-center flex justify-center space-x-6">
-            <a href="https://github.com/Gaurav-7489" target="_blank"
-                class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                        d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.03c-3.338.724-4.033-1.61-4.033-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.76-1.604-2.665-.305-5.466-1.334-5.466-5.933 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.527.117-3.176 0 0 1.008-.322 3.3 1.23a11.51 11.51 0 016 0c2.29-1.552 3.296-1.23 3.296-1.23.653 1.65.242 2.873.118 3.176.77.84 1.234 1.91 1.234 3.22 0 4.61-2.805 5.625-5.476 5.922.43.372.815 1.104.815 2.225v3.293c0 .319.218.694.825.576C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z" />
-                </svg>
-            </a>
+                <div class="mt-8 text-center flex justify-center space-x-6">
+                    <a href="https://github.com/Gaurav-7489" target="_blank"
+                        class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.03c-3.338.724-4.033-1.61-4.033-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.76-1.604-2.665-.305-5.466-1.334-5.466-5.933 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.527.117-3.176 0 0 1.008-.322 3.3 1.23a11.51 11.51 0 016 0c2.29-1.552 3.296-1.23 3.296-1.23.653 1.65.242 2.873.118 3.176.77.84 1.234 1.91 1.234 3.22 0 4.61-2.805 5.625-5.476 5.922.43.372.815 1.104.815 2.225v3.293c0 .319.218.694.825.576C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                    </a>
 
-            <a href="https://www.linkedin.com/in/gaurav-bhardwaj-8080a1325/" target="_blank"
-                class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 448 512">
-                    <path
-                        d="M100.28 448H7.4V148.9h92.88zm-46.44-338C24.07 110 0 85.93 0 56.56S24.07 3.12 53.84 3.12 107.68 27.19 107.68 56.56 83.61 110 53.84 110zM447.9 448h-92.68V302.4c0-34.7-12.44-58.4-43.48-58.4-23.73 0-37.88 16-44.1 31.4-2.27 5.5-2.84 13.2-2.84 21V448h-92.68s1.24-248 0-273.1h92.68v38.7c12.32-19 34.42-46.1 83.68-46.1 61.16 0 107.08 39.8 107.08 125.4V448z" />
-                </svg>
-            </a>
-        </div>
-    </div>
-</section>
+                    <a href="https://www.linkedin.com/in/gaurav-bhardwaj-8080a1325/" target="_blank"
+                        class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 448 512">
+                            <path
+                                d="M100.28 448H7.4V148.9h92.88zm-46.44-338C24.07 110 0 85.93 0 56.56S24.07 3.12 53.84 3.12 107.68 27.19 107.68 56.56 83.61 110 53.84 110zM447.9 448h-92.68V302.4c0-34.7-12.44-58.4-43.48-58.4-23.73 0-37.88 16-44.1 31.4-2.27 5.5-2.84 13.2-2.84 21V448h-92.68s1.24-248 0-273.1h92.68v38.7c12.32-19 34.42-46.1 83.68-46.1 61.16 0 107.08 39.8 107.08 125.4V448z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <section id="journey-section" data-page="journey" class="page-section my-8">
             <div
@@ -512,12 +518,25 @@
     </footer>
 
     <script>
+        // New: Audio Objects
+        // Replace these paths with your actual sound files.
+        const navSound = new Audio('nav-sound.mp3');
+        const darkThemeSound = new Audio('dark-theme.mp3');
+        const lightThemeSound = new Audio('white-theme.mp3');
+        const formSuccessSound = new Audio('succed.mp3');
+        const formErrorSound = new Audio('error.mp3');
+
         // Theme toggle initial setup
         const themeToggle = document.getElementById('theme-toggle');
         const sunIcon = document.getElementById('sun-icon');
         const moonIcon = document.getElementById('moon-icon');
         const htmlElement = document.documentElement;
 
+        // This is a global function now, so it's not a const inside window.onload
+        let clouds, cloudMaterial;
+        let stars, starMaterial;
+
+        // Check for initial theme and set icons
         if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             htmlElement.classList.add('dark');
             sunIcon.classList.add('hidden');
@@ -528,27 +547,45 @@
             moonIcon.classList.add('hidden');
         }
 
+        // Event listener for theme toggle button
+        // Event listener for theme toggle button
         themeToggle.addEventListener('click', () => {
             htmlElement.classList.toggle('dark');
             sunIcon.classList.toggle('hidden');
             moonIcon.classList.toggle('hidden');
             localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
+
+            if (htmlElement.classList.contains('dark')) {
+                lightThemeSound.pause();
+                lightThemeSound.currentTime = 0;
+                darkThemeSound.play();
+                initStars(); // Re-initialize stars when switching to dark mode
+                if (clouds) scene.remove(clouds); // Remove clouds if they exist
+            } else {
+                darkThemeSound.pause();
+                darkThemeSound.currentTime = 0;
+                lightThemeSound.play();
+                initClouds(); // Re-initialize clouds when switching to light mode
+                if (stars) scene.remove(stars); // Remove stars if they exist
+            }
+            updateTorusColor();
         });
 
         // Page Navigation
         const navLinks = document.querySelectorAll('.nav-link');
-        const pageSections = document.querySelectorAll('.page-section');
         const mobileNav = document.getElementById('mobile-nav');
         const hamburgerButton = document.getElementById('hamburger-button');
         const hamburgerIcon = document.getElementById('hamburger-icon');
         const closeIcon = document.getElementById('close-icon');
-        const mainContent = document.getElementById('main-content');
-        const header = document.querySelector('header');
-        const footer = document.querySelector('footer');
 
         navLinks.forEach(link => {
             link.addEventListener('click', (event) => {
                 event.preventDefault();
+
+                // Reset the audio playback to the beginning before playing
+                navSound.currentTime = 0;
+                navSound.play();
+
                 const target = document.getElementById(`${event.currentTarget.dataset.page}-section`);
                 const active = document.querySelector('.page-section.active');
                 if (active && active !== target) {
@@ -564,12 +601,11 @@
         });
 
         function adjustDonutForMenu() {
-            if (window.innerWidth < 640 && !mobileNav.classList.contains('hidden')) {
-                // Menu is open, make donut slightly smaller
+            // Check if torus exists before trying to access its properties
+            if (typeof torus !== 'undefined' && window.innerWidth < 640 && !mobileNav.classList.contains('hidden')) {
                 torus.scale.set(0.65, 0.65, 0.65);
                 camera.position.z = 7;
-            } else {
-                // Menu is closed, adjust donut based on screen size
+            } else if (typeof torus !== 'undefined') {
                 adjust3DObjects();
             }
         }
@@ -578,7 +614,7 @@
             mobileNav.classList.toggle('hidden');
             hamburgerIcon.classList.toggle('hidden');
             closeIcon.classList.toggle('hidden');
-            adjustDonutForMenu(); // Adjust donut size when menu is toggled
+            adjustDonutForMenu();
         });
 
         window.addEventListener('resize', () => {
@@ -587,33 +623,61 @@
                 hamburgerIcon.classList.remove('hidden');
                 closeIcon.classList.add('hidden');
             }
-            adjustDonutForMenu(); // Adjust donut on resize
+            adjustDonutForMenu();
         });
-
         const form = document.getElementById('contact-form');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const formData = new FormData(form);
+
+            // 1. Create and show an initial "Sending" overlay immediately
             const overlay = document.createElement('div');
             overlay.className = 'fixed inset-0 flex items-center justify-center bg-black/70 text-white text-xl font-bold z-50 rounded-lg';
-            overlay.innerText = 'Message sent successfully!';
+            overlay.innerText = 'Sending message...'; // Temporary message
             overlay.style.opacity = 0;
             overlay.style.transition = 'opacity 0.5s ease';
             document.body.appendChild(overlay);
             requestAnimationFrame(() => overlay.style.opacity = 1);
+
+            const formData = new FormData(form);
+
             try {
                 const response = await fetch(form.action, { method: form.method, body: formData, headers: { 'Accept': 'application/json' } });
-                if (response.ok) {
-                    setTimeout(() => { overlay.style.opacity = 0; overlay.addEventListener('transitionend', () => overlay.remove()); form.reset(); }, 1500);
-                } else { throw new Error(); }
-            } catch { overlay.innerText = "Oops! Problem sending message."; setTimeout(() => { overlay.style.opacity = 0; overlay.addEventListener('transitionend', () => overlay.remove()); }, 1500); }
-        });
 
+                // 2. Await the server response before updating the overlay and playing the sound
+                if (response.ok) {
+                    // Play sound and update message at the same time
+                    formSuccessSound.play();
+                    overlay.innerText = 'Message sent successfully! ';
+                    setTimeout(() => {
+                        overlay.style.opacity = 0;
+                        overlay.addEventListener('transitionend', () => overlay.remove());
+                        form.reset();
+                    }, 1500);
+                } else {
+                    // Update overlay and play sound on server-side error
+                    formErrorSound.play();
+                    overlay.innerText = "Oops! Problem sending message. ";
+                    setTimeout(() => {
+                        overlay.style.opacity = 0;
+                        overlay.addEventListener('transitionend', () => overlay.remove());
+                    }, 1500);
+                }
+            } catch (error) {
+                // Update overlay and play sound on network or submission error
+                formErrorSound.play();
+                overlay.innerText = "Oops! Problem sending message. ";
+                setTimeout(() => {
+                    overlay.style.opacity = 0;
+                    overlay.addEventListener('transitionend', () => overlay.remove());
+                }, 1500);
+            }
+        });
         window.onload = function () {
+            // These variables are only defined once here
             const canvasContainer = document.getElementById('canvas-container');
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            
+
             const renderer = new THREE.WebGLRenderer({ alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             canvasContainer.appendChild(renderer.domElement);
@@ -627,8 +691,8 @@
             scene.add(pointLight);
 
             scene.add(new THREE.AmbientLight(0x404040, 1.2));
-            
-            function updateTorusColor() {
+
+            window.updateTorusColor = function () {
                 if (htmlElement.classList.contains('dark')) {
                     torus.material.color.setHex(0x2A52BE);
                 } else {
@@ -636,7 +700,7 @@
                 }
             }
 
-            function adjust3DObjects() {
+            window.adjust3DObjects = function () {
                 const width = window.innerWidth;
                 const height = window.innerHeight;
                 camera.aspect = width / height;
@@ -654,16 +718,8 @@
                 }
             }
 
-            adjust3DObjects();
-            updateTorusColor();
-
-            themeToggle.addEventListener('click', () => {
-                updateTorusColor();
-            });
-
-            let clouds, cloudMaterial;
-
-            function initClouds() {
+            // These functions are now defined outside onload and are global
+            window.initClouds = function () {
                 if (clouds) {
                     scene.remove(clouds);
                     clouds = null;
@@ -696,8 +752,7 @@
                 });
             }
 
-            let stars, starMaterial;
-            function initStars() {
+            window.initStars = function () {
                 if (stars) {
                     scene.remove(stars);
                     stars = null;
@@ -712,16 +767,20 @@
                 stars = new THREE.Points(starGeo, starMaterial);
                 scene.add(stars);
             }
+
+            window.showStars = function (duration = 3000) {
+                if (!stars) return;
+                new TWEEN.Tween(starMaterial).to({ opacity: 1 }, 500).start();
+                setTimeout(() => new TWEEN.Tween(starMaterial).to({ opacity: 0 }, 500).start(), duration);
+            }
+
+            adjust3DObjects();
+            updateTorusColor();
+
             if (htmlElement.classList.contains('dark')) {
                 initStars();
             } else {
                 initClouds();
-            }
-
-            function showStars(duration = 3000) {
-                if (!stars) return;
-                new TWEEN.Tween(starMaterial).to({ opacity: 1 }, 500).start();
-                setTimeout(() => new TWEEN.Tween(starMaterial).to({ opacity: 0 }, 500).start(), duration);
             }
 
             function animate() {
@@ -755,26 +814,53 @@
                 adjust3DObjects();
             });
 
-            themeToggle.addEventListener('click', () => {
-                if (htmlElement.classList.contains('dark')) {
-                    initStars();
-                    if (clouds) scene.remove(clouds);
-                } else {
-                    initClouds();
-                    if (stars) scene.remove(stars);
-                }
-                updateTorusColor();
-            });
-
             navLinks.forEach(link => link.addEventListener('click', () => {
                 if (htmlElement.classList.contains('dark')) showStars(3000);
             }));
         };
+
+
+        const emailInput = document.getElementById('email');
+
+        emailInput.addEventListener('invalid', () => {
+            formErrorSound.play();
+        });
+
+        // Play the light theme sound on initial page load if not in dark mode
+        if (!htmlElement.classList.contains('dark')) {
+            lightThemeSound.play();
+        } else {
+            // Or play the dark theme sound if it's already set to dark mode
+            darkThemeSound.play();
+        }
+
+
+
+
+        // Function to play initial theme sound on first user click
+        function handleFirstInteraction() {
+            // Only run this code once
+            document.body.removeEventListener('click', handleFirstInteraction);
+            document.body.removeEventListener('keydown', handleFirstInteraction);
+
+            if (htmlElement.classList.contains('dark')) {
+                darkThemeSound.play().catch(e => console.error("Autoplay failed:", e));
+            } else {
+                lightThemeSound.play().catch(e => console.error("Autoplay failed:", e));
+            }
+        }
+
+        // Attach event listeners to the body for a single click or keydown
+        document.body.addEventListener('click', handleFirstInteraction, { once: true });
+        document.body.addEventListener('keydown', handleFirstInteraction, { once: true });
+
     </script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
+
+
 </body>
 
 </html>
