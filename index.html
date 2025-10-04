@@ -21,17 +21,23 @@
 
     <style>
         body {
-            background-image: url('gradient.png');
-            /* light theme */
-            background-size: cover;
+            background: linear-gradient(120deg, #ffffff 0%, #f6faff 40%, #a0a1a5 70%, #fafbfc 100%);
+            background-attachment: fixed;
+            background-size: 200% 200%;
             background-repeat: no-repeat;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            animation: futuristic-bg-move 12s ease-in-out infinite;
+        }
+
+        @keyframes futuristic-bg-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .dark body {
             background-image: none;
             /* dark theme uses plain color */
-            background-color: #111827;
+            background-color: #0b0c0c;
             /* dark:bg-gray-900 */
         }
 
@@ -129,9 +135,9 @@
 <body class="min-h-screen flex flex-col text-gray-800 dark:text-gray-100 transition-colors duration-300">
 
     <div id="canvas-container"></div>
-
+    <!-- "bg-neutral-200 dark:bg-neutral-950 border-t border-neutral-300 dark:border-neutral-700 py-6 mt-auto" -->
     <header
-        class="bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 sticky top-0 z-50 p-2 sm:p-4 shadow-md">
+        class="bg-stone-50 dark:bg-neutral-950 text-gray-900 dark:text-gray-100 sticky top-0 z-50 p-2 sm:p-4 shadow-md">
         <div class="container mx-auto flex items-center justify-between">
             <button id="hamburger-button" class="sm:hidden p-2 rounded-full glowing-btn">
                 <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -214,9 +220,25 @@
             class="page-section active text-center flex flex-col items-center justify-center min-h-96 my-8">
             <div
                 class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl max-w-2xl mx-auto border border-[#D9C6A3]">
-                <h1 class="text-3xl md:text-6xl font-extrabold mb-2 sm:mb-4 animate-pulse">Welcome to My Portfolio</h1>
-                <p class="text-lg md:text-xl font-light">Explore my work and learn more about me.</p>
+
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-2 sm:mb-4 animate-pulse">
+                    Welcome to My Portfolio
+                </h1>
+                <br>
+                <img src="my-photo.jpg" alt="Gaurav Bhardwaj"
+                    class="w-56 h-56 md:w-72 md:h-72 object-cover rounded-2xl border-4 border-[#D9C6A3] shadow-2xl mx-auto transform hover:scale-105 transition duration-500">
+
+
+                <br>
+                <h3 class="text-2xl md:text-4xl font-bold mb-2 sm:mb-4 animate-pulse">
+                    I’m Gaurav Bhardwaj
+                </h3>
+
+                <p class="text-lg md:text-xl font-light">
+                    Explore my work and learn more about me.
+                </p>
             </div>
+
         </section>
 
         <section id="about-section" class="page-section my-8">
@@ -511,13 +533,15 @@
         </section>
     </main>
 
-    <footer class="bg-gray-200 dark:bg-gray-900 border-t border-gray-300 dark:border-gray-700 py-6 mt-auto">
+    <footer class="bg-stone-50 dark:bg-neutral-950 border-t border-neutral-300 dark:border-neutral-700 py-6 mt-auto">
         <div class="container mx-auto px-4 text-center text-[#8B5E3C] dark:text-gray-400">
-            <p>© 2024 My Portfolio. All rights reserved.</p>
+            <p>© 2024 My Portfolio : Gaurav Bhardwaj .All rights reserved.</p>
         </div>
     </footer>
 
     <script>
+
+
         // New: Audio Objects
         // Replace these paths with your actual sound files.
         const navSound = new Audio('nav-sound.mp3');
@@ -672,11 +696,13 @@
                 }, 1500);
             }
         });
+        let scene, camera; // Make scene and camera global
+        
         window.onload = function () {
             // These variables are only defined once here
             const canvasContainer = document.getElementById('canvas-container');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
             const renderer = new THREE.WebGLRenderer({ alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
@@ -687,17 +713,18 @@
             scene.add(torus);
 
             const pointLight = new THREE.PointLight(0xffffff, 1);
-            pointLight.position.set(20, 20, 20);
+            pointLight.position.set(5, 5, 5);
             scene.add(pointLight);
 
             scene.add(new THREE.AmbientLight(0x404040, 1.2));
 
             window.updateTorusColor = function () {
                 if (htmlElement.classList.contains('dark')) {
-                    torus.material.color.setHex(0x2A52BE);
+                    torus.material.color.setHex(0x1e293b); // Tailwind slate-800, matches dark theme
                 } else {
-                    torus.material.color.setHex(0x333333);
+                    torus.material.color.setHex(0xaaa9ad); // Slightly darker silver for light theme
                 }
+              
             }
 
             window.adjust3DObjects = function () {
@@ -719,14 +746,16 @@
             }
 
             // These functions are now defined outside onload and are global
+            // Add ambient light only once, outside initClouds
+            const cloudsAmbientLight = new THREE.AmbientLight(0x333333, 1.2);
+            scene.add(cloudsAmbientLight);
+
             window.initClouds = function () {
                 if (clouds) {
                     scene.remove(clouds);
                     clouds = null;
                 }
                 if (htmlElement.classList.contains('dark')) return;
-                const ambientLight = new THREE.AmbientLight(0x333333, 1.2);
-                scene.add(ambientLight);
                 const cloudGeo = new THREE.PlaneGeometry(20, 20);
                 const loader = new THREE.TextureLoader();
                 loader.load('https://threejs.org/examples/textures/sprites/cloud.png', function (texture) {
@@ -817,7 +846,7 @@
             navLinks.forEach(link => link.addEventListener('click', () => {
                 if (htmlElement.classList.contains('dark')) showStars(3000);
             }));
-        };
+
 
 
         const emailInput = document.getElementById('email');
@@ -853,6 +882,8 @@
         // Attach event listeners to the body for a single click or keydown
         document.body.addEventListener('click', handleFirstInteraction, { once: true });
         document.body.addEventListener('keydown', handleFirstInteraction, { once: true });
+
+    } // <-- Added missing closing curly brace for window.onload
 
     </script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
