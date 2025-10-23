@@ -29,9 +29,17 @@
         }
 
         @keyframes futuristic-bg-move {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .dark body {
@@ -217,29 +225,44 @@
     <main class="container mx-auto flex-grow px-2 py-4 sm:px-4 sm:py-8 relative">
 
         <section id="home-section"
-            class="page-section active text-center flex flex-col items-center justify-center min-h-96 my-8">
-            <div
-                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl max-w-2xl mx-auto border border-[#D9C6A3]">
+            class="page-section active flex flex-col items-center justify-center my-8 p-4 sm:p-8">
 
-                <h1 class="text-3xl md:text-5xl font-extrabold mb-2 sm:mb-4 animate-pulse">
-                    Welcome to My Portfolio
+            <div class="bg-transparent dark:bg-transparent backdrop-blur-sm p-4 sm:p-8 rounded-3xl shadow-2xl 
+               max-w-4xl mx-auto w-full flex flex-col items-center justify-center text-center
+               " style="mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);">
+
+                <img src=" my-photo.jpg" alt="Gaurav Bhardwaj" class="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full 
+                   shadow-2xl object-cover mb-8 
+                   transform hover:scale-105 transition duration-500" />
+
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 dark:text-gray-100">
+                    Hi, I’m
+                    <span class="text-[#4169E1] dark:text-blue-400">Gaurav Bhardwaj</span>
                 </h1>
                 <br>
-                <img src="my-photo.jpg" alt="Gaurav Bhardwaj"
-                    class="w-56 h-56 md:w-72 md:h-72 object-cover rounded-2xl border-4 border-[#D9C6A3] shadow-2xl mx-auto transform hover:scale-105 transition duration-500">
-
 
                 <br>
-                <h3 class="text-2xl md:text-4xl font-bold mb-2 sm:mb-4 animate-pulse">
-                    I’m Gaurav Bhardwaj
-                </h3>
 
-                <p class="text-lg md:text-xl font-light">
-                    Explore my work and learn more about me.
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-300 mb-3">
+                    Learning to build smart and creative software
+                </h2>
+
+                <p
+                    class="text-base sm:text-lg md:text-xl max-w-2xl text-gray-800 dark:text-gray-300 mb-8 leading-relaxed">
+                    I began my learning journey with HTML and CSS and really enjoyed creating responsive web layouts.
+                    Then I
+                    moved on to JavaScript, exploring how logic drives everything on the web. I’ve learned API
+                    integration,
+                    built small live frontends and backends with database connections, and, side by side, picked up Git
+                    and
+                    GitHub for version control. Now I’m diving deeper into backend development and DSA to strengthen my
+                    logic and cleverly write problem-solving code. I also plan to master database design and system
+                    performance to build faster, more efficient servers.
                 </p>
-            </div>
 
+            </div>
         </section>
+
 
         <section id="about-section" class="page-section my-8">
             <div
@@ -357,33 +380,59 @@
                 class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3]">
                 <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">My Projects</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
                     <div data-aos="fade-down-left" data-aos-duration="1200"
-                        class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md">
-                        <h3 class="text-xl font-bold mb-2">Project A</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">Null.</p>
-                        <a href="#"
-                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View
-                            Project</a>
+                        class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md relative">
+
+                        <!-- Under Construction Badge -->
+                        <span
+                            class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Work in Progress
+                        </span>
+
+                        <h3 class="text-xl font-bold mb-2">ERS-BLUE</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A full-stack platform for students and teachers, supporting role-based login, attendance
+                            tracking, class sessions, shared resources, and messaging.
+                        </p>
+                        <a href="https://ers-aviendo.vercel.app/" target="_blank"
+                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">
+                            View Project
+                        </a>
                     </div>
-                    <div data-aos="fade-down-left" data-aos-duration="1500"
+
+
+                </div>
+
+                <!-- <div data-aos="fade-down-left" data-aos-duration="1500"
                         class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md">
                         <h3 class="text-xl font-bold mb-2">Project B</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">Null.</p>
-                        <a href="#"
-                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View
-                            Project</a>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Brief description of Project B goes here. Mention tech stack and what it does.
+                        </p>
+                        <a href="#" target="_blank"
+                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">
+                            View Project
+                        </a>
                     </div>
+
                     <div data-aos="fade-down-left" data-aos-duration="1700"
                         class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md">
                         <h3 class="text-xl font-bold mb-2">Project C</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">Null.</p>
-                        <a href="#"
-                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View
-                            Project</a>
-                    </div>
-                </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Brief description of Project C goes here. Mention tech stack and main features.
+                        </p>
+                        <a href="#" target="_blank"
+                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">
+                            View Project
+                        </a>
+                    </div> -->
+
+            </div>
             </div>
         </section>
+
+
         <section id="contact-section" class="page-section my-8">
             <div
                 class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl max-w-lg mx-auto border border-[#D9C6A3]">
@@ -447,7 +496,7 @@
                         </div>
                         <h3 class="text-xl font-bold">Background</h3>
                         <p class="text-gray-700 dark:text-gray-300">
-                            I was born in <span class="font-semibold">Shimla (IGMC)</span> and belong to Kullu, Banjar.
+                            I was born in <span class="font-semibold">Shimla </span> and belong to Kullu, Banjar.
                             The culture and simplicity of the hills have shaped who I am today.
                         </p>
                         <a href="https://www.google.com/maps/dir/?api=1&destination=31.6376776,77.3440792"
@@ -502,7 +551,7 @@
                             I chose <span class="font-semibold">NextGen CTPL</span> because of their updated curriculum
                             and emphasis on modern technologies. From the first day, we started learning coding and
                             practical skills. I am currently in my 2nd year, maintaining an overall <span
-                                class="font-semibold">SGPA of 8.7</span>, and continuously updating my learning journey
+                                class="font-semibold">CGPA of 8.7</span>, and continuously updating my learning journey
                             through projects and hands-on experience.
                         </p>
                         <a href="https://nextgen.ctpl.io/" target="_blank"
@@ -519,13 +568,15 @@
                         <p class="text-gray-700 dark:text-gray-300">
                             I used to focus on one thing at a time, but now I realize the importance of learning
                             multiple technologies simultaneously. I am strengthening my skills in <span
-                                class="font-semibold">AI and Machine Learning</span> as my main focus, while also
-                            learning Web Development, Python backend programming, Linux, SQL, and JavaScript. I have
-                            experience with HTML, CSS, and C, and surface knowledge of other technologies. I am
-                            exploring ML frameworks such as <span class="font-semibold">NumPy, Pandas, Matplotlib,
-                                Scikit-Learn, OpenCV</span> and plan to expand further. Gradually, I am getting the hang
-                            of managing my learning journey and preparing to tackle many exciting projects in the
-                            future.
+                                class="font-semibold">complex backend development, DSA, and AI/ML integration</span> as
+                            my main focus, while also learning web development, backend programming, Linux, database
+                            design, and JavaScript. I have experience with HTML, CSS, JavaScript and C, and a basic
+                            understanding
+                            of other technologies. Additionally, I am exploring database design and ML frameworks such
+                            as <span class="font-semibold">Matplotlib for data visualization and OpenCV for computer
+                                vision</span>, with plans to expand further. Gradually, I am preparing myself to take on
+                            many exciting projects in the future.
+
                         </p>
                     </div>
                 </div>
@@ -697,7 +748,7 @@
             }
         });
         let scene, camera; // Make scene and camera global
-        
+
         window.onload = function () {
             // These variables are only defined once here
             const canvasContainer = document.getElementById('canvas-container');
@@ -724,7 +775,7 @@
                 } else {
                     torus.material.color.setHex(0xaaa9ad); // Slightly darker silver for light theme
                 }
-              
+
             }
 
             window.adjust3DObjects = function () {
@@ -849,41 +900,41 @@
 
 
 
-        const emailInput = document.getElementById('email');
+            const emailInput = document.getElementById('email');
 
-        emailInput.addEventListener('invalid', () => {
-            formErrorSound.play();
-        });
+            emailInput.addEventListener('invalid', () => {
+                formErrorSound.play();
+            });
 
-        // Play the light theme sound on initial page load if not in dark mode
-        if (!htmlElement.classList.contains('dark')) {
-            lightThemeSound.play();
-        } else {
-            // Or play the dark theme sound if it's already set to dark mode
-            darkThemeSound.play();
-        }
-
-
-
-
-        // Function to play initial theme sound on first user click
-        function handleFirstInteraction() {
-            // Only run this code once
-            document.body.removeEventListener('click', handleFirstInteraction);
-            document.body.removeEventListener('keydown', handleFirstInteraction);
-
-            if (htmlElement.classList.contains('dark')) {
-                darkThemeSound.play().catch(e => console.error("Autoplay failed:", e));
+            // Play the light theme sound on initial page load if not in dark mode
+            if (!htmlElement.classList.contains('dark')) {
+                lightThemeSound.play();
             } else {
-                lightThemeSound.play().catch(e => console.error("Autoplay failed:", e));
+                // Or play the dark theme sound if it's already set to dark mode
+                darkThemeSound.play();
             }
-        }
 
-        // Attach event listeners to the body for a single click or keydown
-        document.body.addEventListener('click', handleFirstInteraction, { once: true });
-        document.body.addEventListener('keydown', handleFirstInteraction, { once: true });
 
-    } // <-- Added missing closing curly brace for window.onload
+
+
+            // Function to play initial theme sound on first user click
+            function handleFirstInteraction() {
+                // Only run this code once
+                document.body.removeEventListener('click', handleFirstInteraction);
+                document.body.removeEventListener('keydown', handleFirstInteraction);
+
+                if (htmlElement.classList.contains('dark')) {
+                    darkThemeSound.play().catch(e => console.error("Autoplay failed:", e));
+                } else {
+                    lightThemeSound.play().catch(e => console.error("Autoplay failed:", e));
+                }
+            }
+
+            // Attach event listeners to the body for a single click or keydown
+            document.body.addEventListener('click', handleFirstInteraction, { once: true });
+            document.body.addEventListener('keydown', handleFirstInteraction, { once: true });
+
+        } // <-- Added missing closing curly brace for window.onload
 
     </script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
