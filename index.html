@@ -162,8 +162,8 @@
                 </svg>
             </button>
 
-            <a href="#" class="text-xl font-bold rounded-lg p-1 sm:p-2 transition-colors hover:text-blue-500">My
-                Portfolio</a>
+            <a href="#" id="portfolioBtn"
+                class="text-xl font-bold rounded-lg p-2 transition-colors hover:text-blue-500">My company?</a>
 
             <nav id="desktop-nav"
                 class="hidden sm:flex sm:flex-row sm:space-x-4 md:space-x-8 items-center text-sm sm:text-base">
@@ -223,6 +223,37 @@
             </div>
         </div>
     </header>
+
+
+    <!-- Portfolio Glass Card Overlay -->
+    <!-- Portfolio Card Overlay -->
+    <div id="portfolioOverlay"
+        class="fixed inset-0 bg-black/40 flex items-center justify-center p-4 hidden z-50 backdrop-blur-sm">
+
+        <div class="relative bg-white/20 dark:bg-gray-900/20 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 rounded-2xl shadow-2xl max-w-xl w-full p-10 flex flex-col items-center justify-center text-center transform scale-90 opacity-0 transition-all duration-300"
+            id="modalContent">
+
+            <!-- Close Button -->
+            <button id="closeBtn"
+                class="absolute top-4 right-4 text-gray-200 dark:text-gray-300 hover:text-red-500 text-3xl font-bold transition-colors">&times;</button>
+
+            <!-- Card Content -->
+            <h2
+                class="text-5xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+                Future Company?
+            </h2>
+            <p class="text-xl mb-2 text-gray-100 dark:text-gray-200 leading-relaxed">
+                A future venture focused on delivering high-quality software solutions.
+            </p>
+            <p class="text-xl text-gray-100 dark:text-gray-200 leading-relaxed">
+                Specialized in SaaS products for businesses and individuals.
+            </p>
+
+        </div>
+    </div>
+
+
+
 
     <main class="container mx-auto flex-grow px-2 py-4 sm:px-4 sm:py-8 relative">
 
@@ -593,6 +624,30 @@
     </footer>
 
     <script>
+        const portfolioBtn = document.getElementById('portfolioBtn');
+        const portfolioOverlay = document.getElementById('portfolioOverlay');
+        const modalContent = document.getElementById('modalContent');
+        const closeBtn = document.getElementById('closeBtn');
+        const mainContent = document.querySelector('main');
+
+        portfolioBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            mainContent.classList.add('blur-sm');
+            portfolioOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-90', 'opacity-0');
+            }, 50);
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modalContent.classList.add('scale-90', 'opacity-0');
+            setTimeout(() => {
+                portfolioOverlay.classList.add('hidden');
+                mainContent.classList.remove('blur-sm');
+            }, 300);
+        });
+
+
 
 
         // New: Audio Objects
