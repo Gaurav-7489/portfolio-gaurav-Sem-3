@@ -746,7 +746,7 @@
                 initClouds(); // Re-initialize clouds when switching to light mode
                 if (stars) scene.remove(stars); // Remove stars if they exist
             }
-            updateTorusColor();
+            // updateTorusColor();
         });
 
         // Page Navigation
@@ -862,9 +862,9 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             canvasContainer.appendChild(renderer.domElement);
 
-            const torusMaterial = new THREE.MeshStandardMaterial({ roughness: 0.5 });
+           /* const torusMaterial = new THREE.MeshStandardMaterial({ roughness: 0.5 });
             const torus = new THREE.Mesh(new THREE.TorusGeometry(1.5, 0.5, 16, 100), torusMaterial);
-            scene.add(torus);
+            scene.add(torus); */
 
             const pointLight = new THREE.PointLight(0xffffff, 1);
             pointLight.position.set(5, 5, 5);
@@ -873,11 +873,11 @@
             scene.add(new THREE.AmbientLight(0x404040, 1.2));
 
             window.updateTorusColor = function () {
-                if (htmlElement.classList.contains('dark')) {
-                    torus.material.color.setHex(0x1e293b); // Tailwind slate-800, matches dark theme
-                } else {
-                    torus.material.color.setHex(0xaaa9ad); // Slightly darker silver for light theme
-                }
+                // if (htmlElement.classList.contains('dark')) {
+                //     torus.material.color.setHex(0x1e293b); // Tailwind slate-800, matches dark theme
+                // } else {
+                //     torus.material.color.setHex(0xaaa9ad); // Slightly darker silver for light theme
+                // }
 
             }
 
@@ -889,13 +889,13 @@
 
                 if (width < 320) {
                     camera.position.z = 7.5;
-                    torus.scale.set(0.65, 0.65, 0.65);
+                    // torus.scale.set(0.65, 0.65, 0.65);
                 } else if (width >= 320 && width < 640) {
                     camera.position.z = 6.5;
-                    torus.scale.set(0.7, 0.7, 0.7);
+                    // torus.scale.set(0.7, 0.7, 0.7);
                 } else {
                     camera.position.z = 5;
-                    torus.scale.set(1, 1, 1);
+                    // torus.scale.set(1, 1, 1);
                 }
             }
 
@@ -968,8 +968,8 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-                torus.rotation.x += 0.0015;
-                torus.rotation.y += 0.0015;
+                // torus.rotation.x += 0.0015;
+                // torus.rotation.y += 0.0015;
                 if (stars) {
                     stars.rotation.x += 0.0015;
                     stars.rotation.y += 0.0015;
