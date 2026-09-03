@@ -1,1051 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My 3D Portfolio</title>
+    <meta name="theme-color" content="#0b0c0c">
+    <meta name="description" content="Gaurav Bhardwaj — BCA AI student, programmer and builder focused on web development, backend systems and AI/ML.">
+    <title>Gaurav Bhardwaj — Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class'
-        }
-    </script>
+    <script>tailwind.config = { darkMode: 'class' };</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <style>
-        body {
-            background: linear-gradient(120deg, #ffffff 0%, #f6faff 40%, #a0a1a5 70%, #fafbfc 100%);
-            background-attachment: fixed;
-            background-size: 200% 200%;
-            background-repeat: no-repeat;
-            animation: futuristic-bg-move 12s ease-in-out infinite;
-
-
-        }
-
-        @keyframes futuristic-bg-move {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .dark body {
-            background-image: none;
-            /* dark theme uses plain color */
-            background-color: #0b0c0c;
-            /* dark:bg-gray-900 */
-        }
-
-
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            transition: background-color 1s ease, color 1s ease;
-        }
-
-        body,
-        .page-section,
-        header,
-        footer,
-        .bg-white\/70,
-        .bg-gray-50 {
-            transition: background-color 1s ease, color 1s ease;
-        }
-
-        .page-section {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            position: absolute;
-            width: 100%;
-            top: 0;
-            left: 0;
-            height: 100%;
-            overflow-y: auto;
-        }
-
-        .page-section.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            position: relative;
-        }
-
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .glowing-btn {
-            position: relative;
-            z-index: 10;
-            overflow: hidden;
-            transition: color 0.4s ease-in-out;
-        }
-
-        .glowing-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.4s ease-in-out;
-            z-index: -1;
-        }
-
-        .glowing-btn:hover::before {
-            transform: translate(-50%, -50%) scale(2);
-        }
-
-        #journey-section .inner-scroll-div::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        #journey-section .inner-scroll-div::-webkit-scrollbar-thumb {
-            background-color: rgba(66, 153, 225, 0.6);
-            border-radius: 4px;
-        }
-
-        #journey-section .inner-scroll-div::-webkit-scrollbar-track {
-            background: transparent;
-        }
+        body{background:linear-gradient(120deg,#fff 0%,#f6faff 40%,#a0a1a5 70%,#fafbfc 100%);background-attachment:fixed;background-size:200% 200%;background-repeat:no-repeat;animation:futuristic-bg-move 12s ease-in-out infinite;font-family:'Inter',sans-serif}
+        @keyframes futuristic-bg-move{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+        .dark body{background-image:none;background-color:#0b0c0c}
+        html,body{height:100%;margin:0;transition:background-color .35s ease,color .35s ease}
+        body,header,footer,.page-section,.bg-white\/70,.bg-gray-50{transition:background-color .35s ease,color .35s ease}
+        .page-section{opacity:0;visibility:hidden;transform:translate3d(0,16px,0);transition:opacity .35s ease,transform .35s ease;position:absolute;width:100%;top:0;left:0;height:100%;overflow-y:auto;will-change:opacity,transform;contain:layout paint}
+        .page-section.active{opacity:1;visibility:visible;transform:translate3d(0,0,0);position:relative}
+        #canvas-container{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;contain:strict}
+        #canvas-container canvas{display:block;width:100%;height:100%}
+        .glowing-btn{position:relative;z-index:10;overflow:hidden;transition:color .25s ease-in-out;transform:translateZ(0)}
+        .glowing-btn::before{content:'';position:absolute;top:50%;left:50%;width:100%;height:100%;background:rgba(255,255,255,.2);border-radius:50%;transform:translate3d(-50%,-50%,0) scale(0);transition:transform .25s ease-in-out;z-index:-1}
+        .glowing-btn:hover::before{transform:translate3d(-50%,-50%,0) scale(2)}
+        @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+        @media (max-width:639px){body{background-attachment:scroll}}
+        #journey-section .inner-scroll-div::-webkit-scrollbar{width:8px}
+        #journey-section .inner-scroll-div::-webkit-scrollbar-thumb{background-color:rgba(66,153,225,.6);border-radius:4px}
+        #journey-section .inner-scroll-div::-webkit-scrollbar-track{background:transparent}
     </style>
-
 </head>
-
 <body class="min-h-screen flex flex-col text-gray-800 dark:text-gray-100 transition-colors duration-300">
-
-    <div id="canvas-container"></div>
-    <!-- "bg-neutral-200 dark:bg-neutral-950 border-t border-neutral-300 dark:border-neutral-700 py-6 mt-auto" -->
-    <header
-        class="bg-stone-50 dark:bg-neutral-950 text-gray-900 dark:text-gray-100 sticky top-0 z-50 p-2 sm:p-4 shadow-md">
+    <div id="canvas-container" aria-hidden="true"></div>
+    <header class="bg-stone-50 dark:bg-neutral-950 text-gray-900 dark:text-gray-100 sticky top-0 z-50 p-2 sm:p-4 shadow-md">
         <div class="container mx-auto flex items-center justify-between">
-            <button id="hamburger-button" class="sm:hidden p-2 rounded-full glowing-btn">
-                <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
-                    </path>
-                </svg>
-                <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                    </path>
-                </svg>
-            </button>
-
-            <a href="#" id="portfolioBtn"
-                class="text-xl font-bold rounded-lg p-2 transition-colors hover:text-blue-500">My company?</a>
-
-            <nav id="desktop-nav"
-                class="hidden sm:flex sm:flex-row sm:space-x-4 md:space-x-8 items-center text-sm sm:text-base">
-                <ul class="flex space-x-4 md:space-x-8 items-center">
-                    <li data-aos="fade-down" data-aos-duration="1200"><a href="#" data-page="home"
-                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Home</a>
-                    </li>
-                    <li data-aos="fade-down" data-aos-duration="1500"><a href="#" data-page="project"
-                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Projects</a>
-                    </li>
-                    <li data-aos="fade-down" data-aos-duration="1800"><a href="#" data-page="journey"
-                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">My
-                            Journey</a>
-                    </li>
-                    <li data-aos="fade-down" data-aos-duration="2200"><a href="#" data-page="contact"
-                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Contact</a>
-                    </li>
-                    <li data-aos="fade-down" data-aos-duration="2500"><a href="#" data-page="about"
-                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">About</a>
-                    </li>
-                </ul>
-            </nav>
-
-            <nav id="mobile-nav"
-                class="hidden absolute top-[60px] left-0 w-full bg-gray-200 dark:bg-gray-800 shadow-md p-4 flex-col items-center sm:hidden">
-                <ul class="flex flex-col space-y-4 text-center">
-                    <li data-aos="fade-down" data-aos-duration="1200"><a href="#" data-page="home"
-                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">Home</a>
-                    </li>
-                    <li data-aos="fade-down" data-aos-duration="1500"><a href="#" data-page="project"
-                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">Projects</a>
-                    </li>
-                    <li data-aos="fade-down" data-aos-duration="1800"><a href="#" data-page="journey"
-                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">My
-                            Journey</a>
-                    </li>
-                    <li data-aos="fade-down" data-aos-duration="2200"><a href="#" data-page="contact"
-                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">Contact</a>
-                    </li>
-                    <li data-aos="fade-down" data-aos-duration="2500"><a href="#" data-page="about"
-                            class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">About</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="flex items-center">
-                <button id="theme-toggle" class="p-1 rounded-full glowing-btn ml-2">
-                    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                        aria-hidden="true" focusable="false" class="w-4 h-4 sm:w-5 sm:h-5">
-                        <path fill="currentColor"
-                            d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79 1.8-1.79zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.04 1.04l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 8a4 4 0 100 8 4 4 0 000-8zm4.24 9.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM4.21 18.36l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z" />
-                    </svg>
-                    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                        aria-hidden="true" focusable="false" class="w-4 h-4 sm:w-5 sm:h-5 hidden">
-                        <path fill="currentColor" d="M21.75 15.5A9 9 0 0110.5 2.25 7 7 0 0021.75 15.5z" />
-                    </svg>
-                </button>
-            </div>
+            <button id="hamburger-button" class="sm:hidden p-2 rounded-full glowing-btn" aria-label="Toggle menu" type="button"><svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg><svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            <a href="#" id="portfolioBtn" class="text-xl font-bold rounded-lg p-2 transition-colors hover:text-blue-500">My company?</a>
+            <nav id="desktop-nav" class="hidden sm:flex sm:flex-row sm:space-x-4 md:space-x-8 items-center text-sm sm:text-base"><ul class="flex space-x-4 md:space-x-8 items-center">
+                <li><a href="#" data-page="home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Home</a></li>
+                <li><a href="#" data-page="project" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Projects</a></li>
+                <li><a href="#" data-page="journey" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">My Journey</a></li>
+                <li><a href="#" data-page="contact" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">Contact</a></li>
+                <li><a href="#" data-page="about" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-1 sm:p-2 rounded-lg">About</a></li>
+            </ul></nav>
+            <nav id="mobile-nav" class="hidden absolute top-[60px] left-0 w-full bg-gray-200 dark:bg-gray-800 shadow-md p-4 flex-col items-center sm:hidden"><ul class="flex flex-col space-y-4 text-center">
+                <li><a href="#" data-page="home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">Home</a></li>
+                <li><a href="#" data-page="project" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">Projects</a></li>
+                <li><a href="#" data-page="journey" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">My Journey</a></li>
+                <li><a href="#" data-page="contact" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">Contact</a></li>
+                <li><a href="#" data-page="about" class="nav-link text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors p-2 rounded-lg block">About</a></li>
+            </ul></nav>
+            <button id="theme-toggle" class="p-1 rounded-full glowing-btn ml-2" aria-label="Toggle theme" type="button"><svg id="moon-icon" class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79 1.8-1.79zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.04 1.04l1.79-1.79-1.79-1.79 1.79 1.79zM17 13h3v-2h-3v2zM12 8a4 4 0 100 8 4 4 0 000-8zm4.24 9.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM11 23h2v-3h-2v3zM4.21 18.36l1.79 1.79 1.8-1.79-1.8-1.79-1.79 1.79z"/></svg><svg id="sun-icon" class="w-4 h-4 sm:w-5 sm:h-5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M21.75 15.5A9 9 0 0110.5 2.25 7 7 0 0021.75 15.5z"/></svg></button>
         </div>
     </header>
-
-
-    <!-- Portfolio Glass Card Overlay -->
-    <!-- Portfolio Card Overlay -->
-    <div id="portfolioOverlay"
-        class="fixed inset-0 bg-black/40 flex items-center justify-center p-4 hidden z-50 backdrop-blur-sm">
-
-        <div class="relative bg-white/20 dark:bg-gray-900/20 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 rounded-2xl shadow-2xl max-w-xl w-full p-10 flex flex-col items-center justify-center text-center transform scale-90 opacity-0 transition-all duration-300"
-            id="modalContent">
-
-            <!-- Close Button -->
-            <button id="closeBtn"
-                class="absolute top-4 right-4 text-gray-200 dark:text-gray-300 hover:text-red-500 text-3xl font-bold transition-colors">&times;</button>
-
-            <!-- Card Content -->
-            <h2
-                class="text-5xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-                Future Company?
-            </h2>
-            <p class="text-xl mb-2 text-gray-100 dark:text-gray-200 leading-relaxed">
-                I’m working on starting a virtual company that focuses on building useful software.
-            </p>
-            <p class="text-xl text-gray-100 dark:text-gray-200 leading-relaxed">
-                Also... create minimalistic SaaS products that help people and businesses.
-            </p>
-
-
-        </div>
-    </div>
-
-
-
-
+    <div id="portfolioOverlay" class="fixed inset-0 bg-black/40 flex items-center justify-center p-4 hidden z-50 backdrop-blur-sm"><div id="modalContent" class="relative bg-white/20 dark:bg-gray-900/20 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 rounded-2xl shadow-2xl max-w-xl w-full p-10 flex flex-col items-center justify-center text-center transform scale-90 opacity-0 transition-all duration-300"><button id="closeBtn" class="absolute top-4 right-4 text-gray-200 dark:text-gray-300 hover:text-red-500 text-3xl font-bold transition-colors" aria-label="Close">&times;</button><h2 class="text-5xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">Future Company?</h2><p class="text-xl mb-2 text-gray-100 dark:text-gray-200 leading-relaxed">I’m working toward building a virtual software company focused on useful products.</p><p class="text-xl text-gray-100 dark:text-gray-200 leading-relaxed">The long-term goal is to create minimal, practical SaaS products that solve real problems.</p></div></div>
     <main class="container mx-auto flex-grow px-2 py-4 sm:px-4 sm:py-8 relative">
-
-        <section id="home-section"
-            class="page-section active flex flex-col items-center justify-center my-8 p-4 sm:p-8">
-
-            <div class="bg-transparent dark:bg-transparent backdrop-blur-sm p-4 sm:p-8 rounded-3xl shadow-2xl 
-               max-w-4xl mx-auto w-full flex flex-col items-center justify-center text-center
-               " style="mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);">
-
-                <img src=" my-photo.jpg" alt="Gaurav Bhardwaj" class="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full 
-                   shadow-2xl object-cover mb-8 
-                   transform hover:scale-105 transition duration-500" />
-
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 dark:text-gray-100">
-                    Hi, I’m
-                    <span class="text-[#4169E1] dark:text-blue-400">Gaurav Bhardwaj</span>
-                </h1>
-                <br>
-
-                <br>
-
-                <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-300 mb-3">
-                    Learning to build smart and creative software
-                </h2>
-
-                <p
-                    class="text-base sm:text-lg md:text-xl max-w-2xl text-gray-800 dark:text-gray-300 mb-8 leading-relaxed">
-                    I began my learning journey with HTML and CSS and really enjoyed creating responsive web layouts.
-                    Then I
-                    moved on to JavaScript, exploring how logic drives everything on the web. I’ve learned API
-                    integration,
-                    built small live frontends and backends with database connections, and, side by side, picked up Git
-                    and
-                    GitHub for version control. Now I’m diving deeper into backend development and DSA to strengthen my
-                    logic and cleverly write problem-solving code. I also plan to master database design and system
-                    performance to build faster, more efficient servers.
-                </p>
-
-            </div>
-        </section>
-
-
-        <section id="about-section" class="page-section my-8">
-            <div
-                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3]">
-                <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">About Me</h2>
-                <div class="mb-8">
-                    <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-blue-500 dark:text-blue-400">Skills</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-
-                        <div
-                            class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 flex items-center space-x-3">
-                            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
-                            </svg>
-                            <div>
-                                <h4 class="font-bold">Web Development</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">HTML, CSS</p>
-                            </div>
-                        </div>
-
-                        <div
-                            class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 flex items-center space-x-3">
-                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3" />
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 2a10 10 0 100 20 10 10 0 000-20z" />
-                            </svg>
-                            <div>
-                                <h4 class="font-bold">Backend</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">JavaScript</p>
-                            </div>
-                        </div>
-
-                        <div
-                            class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 flex items-center space-x-3">
-                            <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 7h10v10H7V7z" />
-                            </svg>
-                            <div>
-                                <h4 class="font-bold">Tools</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">Git, VS Code</p>
-                            </div>
-                        </div>
-
-                        <div
-                            class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 flex items-center space-x-3">
-                            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 16h8" />
-                            </svg>
-                            <div>
-                                <h4 class="font-bold">Linux</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">CLI,RHEL</p>
-                            </div>
-                        </div>
-
-                        <div
-                            class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300 flex items-center space-x-3">
-                            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8 10h.01M12 10h.01M16 10h.01M21 16.5a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <div>
-                                <h4 class="font-bold">Communication</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">Verbal, Non-verbal, Para-langauge
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-blue-500 dark:text-blue-400">Certificates
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                        <a href="https://www.credly.com/badges/cba24d8d-e1a1-415d-8bff-e71ac079fa96/linked_in?t=sy7kbb"
-                            target="_blank"
-                            class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                            <p class="font-bold">Red Hat System Administration I (RH124 - RHA) Version 9.3 course</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Issued by Red Hat-credly.com, 2024</p>
-                        </a>
-
-                        <a href="https://drive.google.com/file/d/1nxbbnM_8_elcTBIDrZzeM1oNvnm6Cryq/view" target="_blank"
-                            class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                            <p class="font-bold">IELTS Certificate.
-                            </p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Issued by Cambridge, 2024</p>
-                        </a>
-
-                        <a href="https://drive.google.com/file/d/1Afkm6fGUjKWjO4x-ty3okIkkdtXLdioS/view" target="_blank"
-                            class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                            <p class="font-bold">National Level Online Quiz organized </p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Issued by Government college jind, 2025
-                            </p>
-                        </a>
-
-                        <a href="https://drive.google.com/file/d/1CZGeKMOraCcFo5yDVQe0SjpFd-BRtI0H/view" target="_blank"
-                            class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                            <p class="font-bold">Exin BCS Airtifical intelligence essentail certification</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Issued by Exin, 2024</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="project-section" class="page-section my-8">
-            <div
-                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3]">
-                <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">My Projects</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                    <div data-aos="fade-down-left" data-aos-duration="1200"
-                        class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md relative">
-
-                        <!-- Live Badge -->
-                        <span
-                            class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                            Live & Deployed
-                        </span>
-
-                        <h3 class="text-xl font-bold mb-2">Trackly</h3>
-
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">
-                            A full-stack productivity dashboard for students with secure auth, cloud sync,
-                            weekly tasks, focus tools, analytics, and RoastBot.
-                        </p>
-
-
-                        <a href="https://trackly-liard.vercel.app" target="_blank"
-                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">
-                            View Project
-                        </a>
-                    </div>
-                    <div data-aos="fade-down-left" data-aos-duration="1200"
-                        class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md relative">
-
-                        <!-- Under Construction Badge -->
-                        <span
-                            class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                            Work in Progress
-                        </span>
-
-                        <h3 class="text-xl font-bold mb-2">ERS-BLUE</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">
-                            A full-stack platform for students and teachers, supporting role-based login, attendance
-                            tracking, class sessions, shared resources, and messaging.
-                        </p>
-                        <a href="https://ers-aviendo.vercel.app/" target="_blank"
-                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">
-                            View Project
-                        </a>
-                    </div>
-
-                    <div data-aos="fade-down-left" data-aos-duration="1200"
-                        class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md relative">
-
-                        <!-- Under Construction Badge -->
-                        <span
-                            class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                            Work in Progress
-                        </span>
-
-                        <h3 class="text-xl font-bold mb-2">TourMate-WHITE</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">
-                            A single window tourism platform for Himachal, offering famous spots with their specialties,
-                            hidden gems, smart travel routes, real-time road conditions, and reliable travel information
-                            — all in one place.
-                        </p>
-                        <a href="https://tourism-helper-himachal-7cxf.vercel.app/" target="_blank"
-                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">
-                            View Project
-                        </a>
-                    </div>
-
-
-
-                </div>
-
-
-                <!-- <div data-aos="fade-down-left" data-aos-duration="1500"
-                        class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md">
-                        <h3 class="text-xl font-bold mb-2">Project B</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">
-                            Brief description of Project B goes here. Mention tech stack and what it does.
-                        </p>
-                        <a href="#" target="_blank"
-                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">
-                            View Project
-                        </a>
-                    </div>
-
-                    <div data-aos="fade-down-left" data-aos-duration="1700"
-                        class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md">
-                        <h3 class="text-xl font-bold mb-2">Project C</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">
-                            Brief description of Project C goes here. Mention tech stack and main features.
-                        </p>
-                        <a href="#" target="_blank"
-                            class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">
-                            View Project
-                        </a>
-                    </div> -->
-
-            </div>
-            </div>
-        </section>
-
-
-        <section id="contact-section" class="page-section my-8">
-            <div
-                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl max-w-lg mx-auto border border-[#D9C6A3]">
-                <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">Contact Me</h2>
-
-                <form id="contact-form" action="https://formspree.io/f/xwpnzlgq" method="POST" class="space-y-4">
-                    <div>
-                        <label for="name" class="block text-sm font-medium">Your Name</label>
-                        <input type="text" id="name" name="name" required
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium">Your Email</label>
-                        <input type="email" id="email" name="_replyto" required
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
-                    </div>
-                    <div>
-                        <label for="message" class="block text-sm font-medium">Message</label>
-                        <textarea id="message" name="message" rows="4" required
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"></textarea>
-                    </div>
-                    <button type="submit"
-                        class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl glowing-btn hover:bg-blue-600 transition-colors">
-                        Send Message
-                    </button>
-                </form>
-
-                <div class="mt-8 text-center flex justify-center space-x-6">
-                    <a href="https://github.com/Gaurav-7489" target="_blank"
-                        class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.03c-3.338.724-4.033-1.61-4.033-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.76-1.604-2.665-.305-5.466-1.334-5.466-5.933 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.527.117-3.176 0 0 1.008-.322 3.3 1.23a11.51 11.51 0 016 0c2.29-1.552 3.296-1.23 3.296-1.23.653 1.65.242 2.873.118 3.176.77.84 1.234 1.91 1.234 3.22 0 4.61-2.805 5.625-5.476 5.922.43.372.815 1.104.815 2.225v3.293c0 .319.218.694.825.576C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z" />
-                        </svg>
-                    </a>
-
-                    <a href="https://www.linkedin.com/in/gaurav-bhardwaj-8080a1325/" target="_blank"
-                        class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 448 512">
-                            <path
-                                d="M100.28 448H7.4V148.9h92.88zm-46.44-338C24.07 110 0 85.93 0 56.56S24.07 3.12 53.84 3.12 107.68 27.19 107.68 56.56 83.61 110 53.84 110zM447.9 448h-92.68V302.4c0-34.7-12.44-58.4-43.48-58.4-23.73 0-37.88 16-44.1 31.4-2.27 5.5-2.84 13.2-2.84 21V448h-92.68s1.24-248 0-273.1h92.68v38.7c12.32-19 34.42-46.1 83.68-46.1 61.16 0 107.08 39.8 107.08 125.4V448z" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="journey-section" data-page="journey" class="page-section my-8">
-            <div
-                class="inner-scroll-div bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3] max-w-5xl mx-auto">
-
-                <h2 class="text-2xl sm:text-3xl font-bold mb-10 text-center text-blue-500 dark:text-blue-400">
-                    My Journey
-                </h2>
-
-                <div class="relative border-l-4 border-blue-400 dark:border-blue-500">
-
-                    <div class="mb-10 ml-6">
-                        <div
-                            class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900">
-                        </div>
-                        <h3 class="text-xl font-bold">Background</h3>
-                        <p class="text-gray-700 dark:text-gray-300">
-                            I was born in <span class="font-semibold">Shimla </span> and belong to Kullu, Banjar.
-                            The culture and simplicity of the hills have shaped who I am today.
-                        </p>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=31.6376776,77.3440792"
-                            target="_blank"
-                            class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">
-                            View on Map →
-                        </a>
-                    </div>
-
-                    <div class="mb-10 ml-6">
-                        <div
-                            class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900">
-                        </div>
-                        <h3 class="text-xl font-bold">Schooling</h3>
-                        <p class="text-gray-700 dark:text-gray-300">
-                            I completed my schooling at <span class="font-semibold">Saraswati Vidya Mandir,
-                                Banjar</span>, with a focus on the medical stream. During these years, I was recognized
-                            for my creativity and painting skills, and I was known as an active and bright student among
-                            my peers. Alongside my main subjects, I developed an early interest in computers, which gave
-                            me the foundation to explore technology. The combination of creativity, discipline, and
-                            exposure to computers during my schooling has shaped the way I approach learning and
-                            problem-solving today.
-                        </p>
-                        <a href="https://www.facebook.com/people/Sarswati-Vidya-Mandir-Senior-Secondary-School-Banjar/100054372256803/"
-                            target="_blank"
-                            class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">
-                            School I Attended →
-                        </a>
-                    </div>
-
-                    <div class="mb-10 ml-6">
-                        <div
-                            class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900">
-                        </div>
-                        <h3 class="text-xl font-bold">2024 - Study Abroad Attempt</h3>
-                        <p class="text-gray-700 dark:text-gray-300">
-                            I completed the <span class="font-semibold">IELTS (from Rajasthan)</span> and aimed for an
-                            immersive Software
-                            Engineering program at the University of Limerick, Ireland. Unfortunately, my medical
-                            background led to rejection, and I had to abort my plan of studying abroad. I then decided
-                            to continue my education and career journey in India itself.
-                        </p>
-
-                    </div>
-
-                    <div class="mb-10 ml-6">
-                        <div
-                            class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900">
-                        </div>
-                        <h3 class="text-xl font-bold">2025 - College Journey</h3>
-                        <p class="text-gray-700 dark:text-gray-300">
-                            I chose <span class="font-semibold">NextGen CTPL</span> because of their updated curriculum
-                            and emphasis on modern technologies. From the first day, we started learning coding and
-                            practical skills. I am currently in my 2nd year, maintaining an overall <span
-                                class="font-semibold">CGPA of 8.7</span>, and continuously updating my learning journey
-                            through projects and hands-on experience.
-                        </p>
-                        <a href="https://nextgen.ctpl.io/" target="_blank"
-                            class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">
-                            About NEXTGen CTPL →
-                        </a>
-                    </div>
-
-                    <div class="ml-6">
-                        <div
-                            class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900">
-                        </div>
-                        <h3 class="text-xl font-bold">Present & Future Plan</h3>
-                        <p class="text-gray-700 dark:text-gray-300">
-                            I used to focus on one thing at a time, but now I realize the importance of learning
-                            multiple technologies simultaneously. I am strengthening my skills in <span
-                                class="font-semibold">complex backend development, DSA, and AI/ML integration</span> as
-                            my main focus, while also learning web development, backend programming, Linux, database
-                            design, and JavaScript. I have experience with HTML, CSS, JavaScript and C, and a basic
-                            understanding
-                            of other technologies. Additionally, I am exploring database design and ML frameworks such
-                            as <span class="font-semibold">Matplotlib for data visualization and OpenCV for computer
-                                vision</span>, with plans to expand further. Gradually, I am preparing myself to take on
-                            many exciting projects in the future.
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <section id="home-section" class="page-section active flex flex-col items-center justify-center my-8 p-4 sm:p-8"><div class="bg-transparent dark:bg-transparent backdrop-blur-sm p-4 sm:p-8 rounded-3xl shadow-2xl max-w-4xl mx-auto w-full flex flex-col items-center justify-center text-center" style="mask-image:radial-gradient(circle at center,rgba(0,0,0,1) 90%,rgba(0,0,0,0) 100%);"><img src="my-photo.jpg" alt="Gaurav Bhardwaj" width="256" height="256" loading="eager" decoding="async" fetchpriority="high" class="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full shadow-2xl object-cover mb-8 transform hover:scale-105 transition duration-500"><h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 dark:text-gray-100">Hi, I’m <span class="text-[#4169E1] dark:text-blue-400">Gaurav Bhardwaj</span></h1><h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-300 mb-3">BCA AI student building smart, useful software</h2><p class="text-base sm:text-lg md:text-xl max-w-2xl text-gray-800 dark:text-gray-300 mb-8 leading-relaxed">I’m a programmer focused on building real products — from responsive interfaces and APIs to backend systems, databases, AI/ML and performance. I learn by shipping projects, improving them, and understanding the engineering behind them.</p></div></section>
+        <section id="about-section" class="page-section my-8"><div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3]"><h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">About Me</h2><div class="mb-8"><h3 class="text-xl sm:text-2xl font-semibold mb-4 text-blue-500 dark:text-blue-400">Skills</h3><div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300"><h4 class="font-bold">Web Development</h4><p class="text-sm text-gray-600 dark:text-gray-400">HTML, CSS, JavaScript, responsive UI</p></div>
+            <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300"><h4 class="font-bold">Backend & APIs</h4><p class="text-sm text-gray-600 dark:text-gray-400">JavaScript, REST APIs, server-side concepts</p></div>
+            <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300"><h4 class="font-bold">Programming</h4><p class="text-sm text-gray-600 dark:text-gray-400">TypeScript, JavaScript, C, Python</p></div>
+            <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300"><h4 class="font-bold">Linux & Git</h4><p class="text-sm text-gray-600 dark:text-gray-400">CLI, RHEL, Git, GitHub, VS Code</p></div>
+            <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300"><h4 class="font-bold">AI / ML</h4><p class="text-sm text-gray-600 dark:text-gray-400">OpenCV, Matplotlib, AI product work</p></div>
+            <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300"><h4 class="font-bold">Data & Databases</h4><p class="text-sm text-gray-600 dark:text-gray-400">PostgreSQL, Supabase, schemas, RLS</p></div>
+            <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300"><h4 class="font-bold">Product Engineering</h4><p class="text-sm text-gray-600 dark:text-gray-400">Performance, UX thinking, deployment</p></div>
+            <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300"><h4 class="font-bold">Problem Solving</h4><p class="text-sm text-gray-600 dark:text-gray-400">DSA, debugging, system thinking</p></div>
+        </div></div><div><h3 class="text-xl sm:text-2xl font-semibold mb-4 text-blue-500 dark:text-blue-400">Certificates</h3><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><a href="https://www.credly.com/badges/cba24d8d-e1a1-415d-8bff-e71ac079fa96/linked_in?t=sy7kbb" target="_blank" rel="noopener noreferrer" class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300"><p class="font-bold">Red Hat System Administration I (RH124 - RHA) Version 9.3</p><p class="text-sm text-gray-600 dark:text-gray-400">Red Hat / Credly</p></a><a href="https://drive.google.com/file/d/1nxbbnM_8_elcTBIDrZzeM1oNvnm6Cryq/view" target="_blank" rel="noopener noreferrer" class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300"><p class="font-bold">IELTS Certificate</p><p class="text-sm text-gray-600 dark:text-gray-400">Cambridge, 2024</p></a><a href="https://drive.google.com/file/d/1Afkm6fGUjKWjO4x-ty3okIkkdtXLdioS/view" target="_blank" rel="noopener noreferrer" class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300"><p class="font-bold">National Level Online Quiz</p><p class="text-sm text-gray-600 dark:text-gray-400">Government College Jind, 2025</p></a><a href="https://drive.google.com/file/d/1CZGeKMOraCcFo5yDVQe0SjpFd-BRtI0H/view" target="_blank" rel="noopener noreferrer" class="block bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-2xl transform hover:scale-105 transition-all duration-300"><p class="font-bold">Artificial Intelligence Essentials</p><p class="text-sm text-gray-600 dark:text-gray-400">EXIN / BCS, 2024</p></a></div></div></div></section>
+        <section id="project-section" class="page-section my-8"><div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3]"><h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">My Projects</h2><div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md relative"><span class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">Flagship</span><h3 class="text-xl font-bold mb-2">Extrovert</h3><p class="text-gray-600 dark:text-gray-400 mb-4">A verified social discovery platform with local discovery, identity, verification, social connections, chats, privacy controls and an integrated optional dating experience.</p><a href="https://extrovert-ten.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View Project</a> <a href="https://github.com/Gaurav-7489/Extrovert" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">GitHub →</a></div>
+            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md relative"><span class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">Flagship</span><h3 class="text-xl font-bold mb-2">Extrovert Date</h3><p class="text-gray-600 dark:text-gray-400 mb-4">Dating layer with contextual discovery, dating profiles, preferences, likes, passes, matches, chat, Super Likes, rewards and the Beyond premium experience.</p><a href="https://datelocal.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View Project</a> <a href="https://github.com/Gaurav-7489/DateLocal" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">GitHub →</a></div>
+            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md relative"><span class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">Deployed</span><h3 class="text-xl font-bold mb-2">ResumeScannerAI</h3><p class="text-gray-600 dark:text-gray-400 mb-4">An AI-focused resume analysis project built as a practical application for experimenting with intelligent document workflows.</p><a href="https://resume-scanner-ai-one.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View Project</a> <a href="https://github.com/Gaurav-7489/ResumeScannerAi" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">GitHub →</a></div>
+            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md relative"><span class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">Deployed</span><h3 class="text-xl font-bold mb-2">Trackly</h3><p class="text-gray-600 dark:text-gray-400 mb-4">A productivity dashboard for students with authentication, cloud sync, weekly tasks, focus tools, analytics and RoastBot.</p><a href="https://trackly-liard.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View Project</a> <a href="https://github.com/Gaurav-7489/Trackly" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">GitHub →</a></div>
+            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md relative"><h3 class="text-xl font-bold mb-2">TourMate / Himachal Tourism</h3><p class="text-gray-600 dark:text-gray-400 mb-4">A tourism concept for Himachal Pradesh covering destinations, specialties, hidden gems, smart routes, road information and travel guidance.</p><a href="https://tourism-helper-himachal-7cxf.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View Project</a> <a href="https://github.com/Gaurav-7489/tourism-helper-himachal" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">GitHub →</a></div>
+            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md relative"><span class="absolute top-4 right-4 bg-purple-500 text-white text-xs font-bold px-2 py-1 rounded-full">Tool</span><h3 class="text-xl font-bold mb-2">Subtitle Maker</h3><p class="text-gray-600 dark:text-gray-400 mb-4">A lightweight browser-based subtitle creation/editing tool aimed at making simple subtitle work faster and easier.</p><a href="https://subtitle-maker-platform.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors">View Project</a> <a href="https://github.com/Gaurav-7489/subtitle-maker-platform" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">GitHub →</a></div>
+        </div></div></section>
+        <section id="contact-section" class="page-section my-8"><div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl max-w-lg mx-auto border border-[#D9C6A3]"><h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">Contact Me</h2><p class="mb-6 text-center text-gray-700 dark:text-gray-300">Open to internships, collaborations, interesting software ideas and conversations about building useful products.</p><form id="contact-form" action="https://formspree.io/f/xwpnzlgq" method="POST" class="space-y-4"><div><label for="name" class="block text-sm font-medium">Your Name</label><input type="text" id="name" name="name" required autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"></div><div><label for="email" class="block text-sm font-medium">Your Email</label><input type="email" id="email" name="_replyto" required autocomplete="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"></div><div><label for="message" class="block text-sm font-medium">Message</label><textarea id="message" name="message" rows="4" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"></textarea></div><button type="submit" class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-xl glowing-btn hover:bg-blue-600 transition-colors">Send Message</button></form><div class="mt-8 text-center flex justify-center space-x-6"><a href="mailto:gauravbhardwaj7489@gmail.com" class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">Email</a><a href="https://github.com/Gaurav-7489" target="_blank" rel="noopener noreferrer" class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">GitHub</a><a href="https://www.linkedin.com/in/gaurav-bhardwaj-8080a1325/" target="_blank" rel="noopener noreferrer" class="text-gray-800 dark:text-gray-100 hover:text-blue-500 transition-colors p-3 rounded-full border border-gray-300 dark:border-gray-600 shadow hover:shadow-lg">LinkedIn</a></div><p class="mt-4 text-center text-xs text-gray-500 dark:text-gray-500">Instagram link will be added once the correct handle is confirmed.</p></div></section>
+        <section id="journey-section" data-page="journey" class="page-section my-8"><div class="inner-scroll-div bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-xl border border-[#D9C6A3] max-w-5xl mx-auto"><h2 class="text-2xl sm:text-3xl font-bold mb-10 text-center text-blue-500 dark:text-blue-400">My Journey</h2><div class="relative border-l-4 border-blue-400 dark:border-blue-500">
+            <div class="mb-10 ml-6"><div class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900"></div><h3 class="text-xl font-bold">Roots</h3><p class="text-gray-700 dark:text-gray-300">I was born in Shimla and belong to Kullu, Banjar. The hills, simplicity and creativity around me shaped the way I think and learn.</p></div>
+            <div class="mb-10 ml-6"><div class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900"></div><h3 class="text-xl font-bold">Schooling</h3><p class="text-gray-700 dark:text-gray-300">I completed my schooling at Saraswati Vidya Mandir, Banjar. I studied the medical stream while developing an early interest in computers, creativity and problem solving.</p><a href="https://www.facebook.com/people/Sarswati-Vidya-Mandir-Senior-Secondary-School-Banjar/100054372256803/" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">School I Attended →</a></div>
+            <div class="mb-10 ml-6"><div class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900"></div><h3 class="text-xl font-bold">2024 — The Shift Toward Software</h3><p class="text-gray-700 dark:text-gray-300">I completed IELTS and explored studying Software Engineering abroad. When that plan did not work out, I chose to continue building my career in India instead of stopping.</p></div>
+            <div class="mb-10 ml-6"><div class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900"></div><h3 class="text-xl font-bold">2025 — College & Practical Learning</h3><p class="text-gray-700 dark:text-gray-300">I started my BCA-focused journey with a strong practical emphasis, building projects, learning programming fundamentals, Git/GitHub, Linux, APIs, databases and modern web development. I’m continuing to push from classroom learning toward real software engineering.</p><a href="https://nextgen.ctpl.io/" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-blue-500 dark:text-blue-400 font-medium hover:underline">About NEXTGen CTPL →</a></div>
+            <div class="mb-10 ml-6"><div class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900"></div><h3 class="text-xl font-bold">2026 — Building Real Products</h3><p class="text-gray-700 dark:text-gray-300">My focus has moved toward shipping complete products: Extrovert and Extrovert Date, ResumeScannerAI, Trackly and other practical applications. I’m especially interested in backend engineering, database design, security, performance, AI/ML integration and clean product UX.</p></div>
+            <div class="ml-6"><div class="absolute w-4 h-4 bg-blue-400 dark:bg-blue-500 rounded-full -left-2 border border-white dark:border-gray-900"></div><h3 class="text-xl font-bold">Semester 5 — Current Focus</h3><p class="text-gray-700 dark:text-gray-300">I’m continuing my BCA AI specialization with a stronger engineering mindset: better DSA, deeper backend knowledge, AI-assisted products, system design, optimization, deployment, and learning by building. The long-term goal is simple — become a valuable programmer who can turn ideas into reliable software.</p></div>
+        </div></div></section>
     </main>
-
-    <footer class="bg-stone-50 dark:bg-neutral-950 border-t border-neutral-300 dark:border-neutral-700 py-6 mt-auto">
-        <div class="container mx-auto px-4 text-center text-[#8B5E3C] dark:text-gray-400">
-            <p>© 2024 My Portfolio : Gaurav Bhardwaj .All rights reserved.</p>
-        </div>
-    </footer>
-
+    <footer class="bg-stone-50 dark:bg-neutral-950 border-t border-neutral-300 dark:border-neutral-700 py-6 mt-auto"><div class="container mx-auto px-4 text-center text-[#8B5E3C] dark:text-gray-400"><p>© 2026 Gaurav Bhardwaj. All rights reserved.</p></div></footer>
     <script>
-        const portfolioBtn = document.getElementById('portfolioBtn');
-        const portfolioOverlay = document.getElementById('portfolioOverlay');
-        const modalContent = document.getElementById('modalContent');
-        const closeBtn = document.getElementById('closeBtn');
-        const mainContent = document.querySelector('main');
-
-        portfolioBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            mainContent.classList.add('blur-sm');
-            portfolioOverlay.classList.remove('hidden');
-            setTimeout(() => {
-                modalContent.classList.remove('scale-90', 'opacity-0');
-            }, 50);
-        });
-
-        closeBtn.addEventListener('click', () => {
-            modalContent.classList.add('scale-90', 'opacity-0');
-            setTimeout(() => {
-                portfolioOverlay.classList.add('hidden');
-                mainContent.classList.remove('blur-sm');
-            }, 300);
-        });
-
-
-
-
-        // New: Audio Objects
-        // Replace these paths with your actual sound files.
-        const navSound = new Audio('nav-sound.mp3');
-        const darkThemeSound = new Audio('dark-theme.mp3');
-        const lightThemeSound = new Audio('white-theme.mp3');
-        const formSuccessSound = new Audio('succed.mp3');
-        const formErrorSound = new Audio('error.mp3');
-
-        // Theme toggle initial setup
-        const themeToggle = document.getElementById('theme-toggle');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');
-        const htmlElement = document.documentElement;
-
-        // This is a global function now, so it's not a const inside window.onload
-        let clouds, cloudMaterial;
-        let stars, starMaterial;
-
-        // Check for initial theme and set icons
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-            sunIcon.classList.add('hidden');
-            moonIcon.classList.remove('hidden');
-        } else {
-            htmlElement.classList.remove('dark');
-            sunIcon.classList.remove('hidden');
-            moonIcon.classList.add('hidden');
-        }
-
-        // Event listener for theme toggle button
-        // Event listener for theme toggle button
-        themeToggle.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            sunIcon.classList.toggle('hidden');
-            moonIcon.classList.toggle('hidden');
-            localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
-
-            if (htmlElement.classList.contains('dark')) {
-                lightThemeSound.pause();
-                lightThemeSound.currentTime = 0;
-                darkThemeSound.play();
-                initStars(); // Re-initialize stars when switching to dark mode
-                if (clouds) scene.remove(clouds); // Remove clouds if they exist
-            } else {
-                darkThemeSound.pause();
-                darkThemeSound.currentTime = 0;
-                lightThemeSound.play();
-                initClouds(); // Re-initialize clouds when switching to light mode
-                if (stars) scene.remove(stars); // Remove stars if they exist
-            }
-            // updateTorusColor();
-        });
-
-        // Page Navigation
-        const navLinks = document.querySelectorAll('.nav-link');
-        const mobileNav = document.getElementById('mobile-nav');
-        const hamburgerButton = document.getElementById('hamburger-button');
-        const hamburgerIcon = document.getElementById('hamburger-icon');
-        const closeIcon = document.getElementById('close-icon');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-
-                // Reset the audio playback to the beginning before playing
-                navSound.currentTime = 0;
-                navSound.play();
-
-                const target = document.getElementById(`${event.currentTarget.dataset.page}-section`);
-                const active = document.querySelector('.page-section.active');
-                if (active && active !== target) {
-                    active.classList.remove('active');
-                    requestAnimationFrame(() => target.classList.add('active'));
-                }
-                if (window.innerWidth < 640) {
-                    mobileNav.classList.add('hidden');
-                    hamburgerIcon.classList.remove('hidden');
-                    closeIcon.classList.add('hidden');
-                }
-            });
-        });
-
-        function adjustDonutForMenu() {
-            // Check if torus exists before trying to access its properties
-            if (typeof torus !== 'undefined' && window.innerWidth < 640 && !mobileNav.classList.contains('hidden')) {
-                torus.scale.set(0.65, 0.65, 0.65);
-                camera.position.z = 7;
-            } else if (typeof torus !== 'undefined') {
-                adjust3DObjects();
-            }
-        }
-
-        hamburgerButton.addEventListener('click', () => {
-            mobileNav.classList.toggle('hidden');
-            hamburgerIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-            adjustDonutForMenu();
-        });
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 640) {
-                mobileNav.classList.add('hidden');
-                hamburgerIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-            }
-            adjustDonutForMenu();
-        });
-        const form = document.getElementById('contact-form');
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            // 1. Create and show an initial "Sending" overlay immediately
-            const overlay = document.createElement('div');
-            overlay.className = 'fixed inset-0 flex items-center justify-center bg-black/70 text-white text-xl font-bold z-50 rounded-lg';
-            overlay.innerText = 'Sending message...'; // Temporary message
-            overlay.style.opacity = 0;
-            overlay.style.transition = 'opacity 0.5s ease';
-            document.body.appendChild(overlay);
-            requestAnimationFrame(() => overlay.style.opacity = 1);
-
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch(form.action, { method: form.method, body: formData, headers: { 'Accept': 'application/json' } });
-
-                // 2. Await the server response before updating the overlay and playing the sound
-                if (response.ok) {
-                    // Play sound and update message at the same time
-                    formSuccessSound.play();
-                    overlay.innerText = 'Message sent successfully! ';
-                    setTimeout(() => {
-                        overlay.style.opacity = 0;
-                        overlay.addEventListener('transitionend', () => overlay.remove());
-                        form.reset();
-                    }, 1500);
-                } else {
-                    // Update overlay and play sound on server-side error
-                    formErrorSound.play();
-                    overlay.innerText = "Oops! Problem sending message. ";
-                    setTimeout(() => {
-                        overlay.style.opacity = 0;
-                        overlay.addEventListener('transitionend', () => overlay.remove());
-                    }, 1500);
-                }
-            } catch (error) {
-                // Update overlay and play sound on network or submission error
-                formErrorSound.play();
-                overlay.innerText = "Oops! Problem sending message. ";
-                setTimeout(() => {
-                    overlay.style.opacity = 0;
-                    overlay.addEventListener('transitionend', () => overlay.remove());
-                }, 1500);
-            }
-        });
-        let scene, camera; // Make scene and camera global
-
-        window.onload = function () {
-            // These variables are only defined once here
-            const canvasContainer = document.getElementById('canvas-container');
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-            const renderer = new THREE.WebGLRenderer({ alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            canvasContainer.appendChild(renderer.domElement);
-
-           /* const torusMaterial = new THREE.MeshStandardMaterial({ roughness: 0.5 });
-            const torus = new THREE.Mesh(new THREE.TorusGeometry(1.5, 0.5, 16, 100), torusMaterial);
-            scene.add(torus); */
-
-            const pointLight = new THREE.PointLight(0xffffff, 1);
-            pointLight.position.set(5, 5, 5);
-            scene.add(pointLight);
-
-            scene.add(new THREE.AmbientLight(0x404040, 1.2));
-
-            window.updateTorusColor = function () {
-                // if (htmlElement.classList.contains('dark')) {
-                //     torus.material.color.setHex(0x1e293b); // Tailwind slate-800, matches dark theme
-                // } else {
-                //     torus.material.color.setHex(0xaaa9ad); // Slightly darker silver for light theme
-                // }
-
-            }
-
-            window.adjust3DObjects = function () {
-                const width = window.innerWidth;
-                const height = window.innerHeight;
-                camera.aspect = width / height;
-                camera.updateProjectionMatrix();
-
-                if (width < 320) {
-                    camera.position.z = 7.5;
-                    // torus.scale.set(0.65, 0.65, 0.65);
-                } else if (width >= 320 && width < 640) {
-                    camera.position.z = 6.5;
-                    // torus.scale.set(0.7, 0.7, 0.7);
-                } else {
-                    camera.position.z = 5;
-                    // torus.scale.set(1, 1, 1);
-                }
-            }
-
-            // These functions are now defined outside onload and are global
-            // Add ambient light only once, outside initClouds
-            const cloudsAmbientLight = new THREE.AmbientLight(0x333333, 1.2);
-            scene.add(cloudsAmbientLight);
-
-            window.initClouds = function () {
-                if (clouds) {
-                    scene.remove(clouds);
-                    clouds = null;
-                }
-                if (htmlElement.classList.contains('dark')) return;
-                const cloudGeo = new THREE.PlaneGeometry(20, 20);
-                const loader = new THREE.TextureLoader();
-                loader.load('https://threejs.org/examples/textures/sprites/cloud.png', function (texture) {
-                    cloudMaterial = new THREE.MeshLambertMaterial({
-                        map: texture,
-                        transparent: true,
-                        opacity: 0.7,
-                        depthWrite: false
-                    });
-                    clouds = new THREE.Group();
-                    for (let i = 0; i < 30; i++) {
-                        const cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
-                        cloud.position.set(
-                            Math.random() * 100 - 50,
-                            Math.random() * 50 - 25,
-                            Math.random() * -50 - 10
-                        );
-                        cloud.rotation.z = Math.random() * 2 * Math.PI;
-                        cloud.scale.setScalar(Math.random() * 2 + 1);
-                        clouds.add(cloud);
-                    }
-                    scene.add(clouds);
-                });
-            }
-
-            window.initStars = function () {
-                if (stars) {
-                    scene.remove(stars);
-                    stars = null;
-                }
-                if (!htmlElement.classList.contains('dark')) return;
-                const starGeo = new THREE.BufferGeometry();
-                const starCount = 2000;
-                const positions = [];
-                for (let i = 0; i < starCount * 3; i++) positions.push((Math.random() - 0.5) * 200);
-                starGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-                starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.2, transparent: true, opacity: 0 });
-                stars = new THREE.Points(starGeo, starMaterial);
-                scene.add(stars);
-            }
-
-            window.showStars = function (duration = 3000) {
-                if (!stars) return;
-                new TWEEN.Tween(starMaterial).to({ opacity: 1 }, 500).start();
-                setTimeout(() => new TWEEN.Tween(starMaterial).to({ opacity: 0 }, 500).start(), duration);
-            }
-
-            adjust3DObjects();
-            updateTorusColor();
-
-            if (htmlElement.classList.contains('dark')) {
-                initStars();
-            } else {
-                initClouds();
-            }
-
-            function animate() {
-                requestAnimationFrame(animate);
-                // torus.rotation.x += 0.0015;
-                // torus.rotation.y += 0.0015;
-                if (stars) {
-                    stars.rotation.x += 0.0015;
-                    stars.rotation.y += 0.0015;
-                }
-                if (clouds) {
-                    clouds.children.forEach(cloud => {
-                        cloud.position.x -= 0.005;
-                        if (cloud.position.x < -60) {
-                            cloud.position.x = 60;
-                        }
-                    });
-                }
-                renderer.render(scene, camera);
-            }
-            animate();
-
-            function animateTween(time) {
-                TWEEN.update(time);
-                requestAnimationFrame(animateTween);
-            }
-            animateTween();
-
-            window.addEventListener('resize', () => {
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                adjust3DObjects();
-            });
-
-            navLinks.forEach(link => link.addEventListener('click', () => {
-                if (htmlElement.classList.contains('dark')) showStars(3000);
-            }));
-
-
-
-            const emailInput = document.getElementById('email');
-
-            emailInput.addEventListener('invalid', () => {
-                formErrorSound.play();
-            });
-
-            // Play the light theme sound on initial page load if not in dark mode
-            if (!htmlElement.classList.contains('dark')) {
-                lightThemeSound.play();
-            } else {
-                // Or play the dark theme sound if it's already set to dark mode
-                darkThemeSound.play();
-            }
-
-
-
-
-            // Function to play initial theme sound on first user click
-            function handleFirstInteraction() {
-                // Only run this code once
-                document.body.removeEventListener('click', handleFirstInteraction);
-                document.body.removeEventListener('keydown', handleFirstInteraction);
-
-                if (htmlElement.classList.contains('dark')) {
-                    darkThemeSound.play().catch(e => console.error("Autoplay failed:", e));
-                } else {
-                    lightThemeSound.play().catch(e => console.error("Autoplay failed:", e));
-                }
-            }
-
-            // Attach event listeners to the body for a single click or keydown
-            document.body.addEventListener('click', handleFirstInteraction, { once: true });
-            document.body.addEventListener('keydown', handleFirstInteraction, { once: true });
-
-        } // <-- Added missing closing curly brace for window.onload
-
+    (()=>{
+      'use strict';
+      const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+      const portfolioBtn=$('#portfolioBtn'),overlay=$('#portfolioOverlay'),modal=$('#modalContent'),close=$('#closeBtn'),main=document.querySelector('main');
+      const themeToggle=$('#theme-toggle'),sun=$('#sun-icon'),moon=$('#moon-icon'),html=document.documentElement;
+      const mobileNav=$('#mobile-nav'),hamb=$('#hamburger-button'),hambIcon=$('#hamburger-icon'),closeIcon=$('#close-icon');
+      const form=$('#contact-form');
+      const saved=localStorage.getItem('theme');
+      if(saved==='dark'||(!saved&&window.matchMedia('(prefers-color-scheme: dark)').matches))html.classList.add('dark'); else html.classList.remove('dark');
+      const syncIcons=()=>{const d=html.classList.contains('dark');sun.classList.toggle('hidden',d);moon.classList.toggle('hidden',!d)};syncIcons();
+      let audioReady=false;const sounds={nav:new Audio('nav-sound.mp3'),dark:new Audio('dark-theme.mp3'),light:new Audio('white-theme.mp3'),success:new Audio('succed.mp3'),error:new Audio('error.mp3')};Object.values(sounds).forEach(a=>{a.preload='none';a.playsInline=true});
+      const play=a=>{if(!audioReady)return;a.currentTime=0;a.play().catch(()=>{})};
+      const prime=()=>{audioReady=true;document.removeEventListener('pointerdown',prime,{capture:true});document.removeEventListener('keydown',prime,{capture:true})};document.addEventListener('pointerdown',prime,{capture:true,passive:true});document.addEventListener('keydown',prime,{capture:true});
+      portfolioBtn.addEventListener('click',e=>{e.preventDefault();main.classList.add('blur-sm');overlay.classList.remove('hidden');requestAnimationFrame(()=>modal.classList.remove('scale-90','opacity-0'))});
+      close.addEventListener('click',()=>{modal.classList.add('scale-90','opacity-0');setTimeout(()=>{overlay.classList.add('hidden');main.classList.remove('blur-sm')},300)});
+      overlay.addEventListener('click',e=>{if(e.target===overlay)close.click()});
+      themeToggle.addEventListener('click',()=>{html.classList.toggle('dark');const d=html.classList.contains('dark');localStorage.setItem('theme',d?'dark':'light');syncIcons();play(d?sounds.dark:sounds.light);sceneController?.setTheme(d)});
+      const activate=page=>{const target=document.getElementById(`${page}-section`);if(!target)return;const active=document.querySelector('.page-section.active');if(active===target)return;active?.classList.remove('active');requestAnimationFrame(()=>target.classList.add('active'));if(innerWidth<640){mobileNav.classList.add('hidden');hambIcon.classList.remove('hidden');closeIcon.classList.add('hidden')}};
+      $$('.nav-link').forEach(l=>l.addEventListener('click',e=>{e.preventDefault();play(sounds.nav);activate(e.currentTarget.dataset.page)}));
+      hamb.addEventListener('click',()=>{mobileNav.classList.toggle('hidden');hambIcon.classList.toggle('hidden');closeIcon.classList.toggle('hidden')});
+      addEventListener('resize',()=>{if(innerWidth>=640){mobileNav.classList.add('hidden');hambIcon.classList.remove('hidden');closeIcon.classList.add('hidden')}},{passive:true});
+      form?.addEventListener('submit',async e=>{e.preventDefault();const o=document.createElement('div');o.className='fixed inset-0 flex items-center justify-center bg-black/70 text-white text-xl font-bold z-50 rounded-lg';o.textContent='Sending message...';o.style.opacity='0';o.style.transition='opacity .3s ease';document.body.appendChild(o);requestAnimationFrame(()=>o.style.opacity='1');try{const r=await fetch(form.action,{method:form.method,body:new FormData(form),headers:{Accept:'application/json'}});if(!r.ok)throw new Error();play(sounds.success);o.textContent='Message sent successfully!';setTimeout(()=>{o.style.opacity='0';setTimeout(()=>o.remove(),300);form.reset()},1200)}catch{play(sounds.error);o.textContent='Oops! Problem sending message.';setTimeout(()=>{o.style.opacity='0';setTimeout(()=>o.remove(),300)},1200)}});
+      let sceneController=null;
+      const initBackground=()=>{const THREE=window.THREE,container=$('#canvas-container');if(!THREE||!container)return;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;const renderer=new THREE.WebGLRenderer({alpha:true,antialias:false,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.setSize(innerWidth,innerHeight,false);container.appendChild(renderer.domElement);const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.1,400);camera.position.z=innerWidth<640?6.5:5;scene.add(new THREE.AmbientLight(0x444444,1.1));let points=null,geo=null,mat=null,running=!document.hidden&&!reduced,raf=0,last=performance.now();const build=()=>{if(!html.classList.contains('dark'))return;geo?.dispose();mat?.dispose();if(points)scene.remove(points);geo=new THREE.BufferGeometry();const count=innerWidth<640?700:1100,pos=new Float32Array(count*3);for(let i=0;i<pos.length;i++)pos[i]=(Math.random()-.5)*180;geo.setAttribute('position',new THREE.BufferAttribute(pos,3));mat=new THREE.PointsMaterial({color:0xffffff,size:.18,transparent:true,opacity:.72,sizeAttenuation:true});points=new THREE.Points(geo,mat);scene.add(points)};const clear=()=>{if(points)scene.remove(points);points=null;geo?.dispose();mat?.dispose();geo=null;mat=null};const loop=t=>{raf=requestAnimationFrame(loop);if(!running)return;const dt=Math.min((t-last)/16.67,2);last=t;if(points){points.rotation.x+=.00045*dt;points.rotation.y+=.00075*dt}renderer.render(scene,camera)};sceneController={setTheme:d=>{d?build():clear();renderer.render(scene,camera)}};document.addEventListener('visibilitychange',()=>{running=!document.hidden&&!reduced;if(!running&&raf)cancelAnimationFrame(raf);if(running&&!raf){last=performance.now();raf=requestAnimationFrame(loop)}},{passive:true});addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.position.z=innerWidth<640?6.5:5;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight,false);if(html.classList.contains('dark'))build()},{passive:true});if(html.classList.contains('dark'))build();renderer.render(scene,camera);if(!reduced)raf=requestAnimationFrame(loop)};
+      addEventListener('load',initBackground,{once:true});
+    })();
     </script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-
-
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script defer src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>addEventListener('load',()=>{if(window.AOS)AOS.init({once:true,duration:450,offset:0,disable:'mobile'})},{once:true})</script>
 </body>
-
 </html>
